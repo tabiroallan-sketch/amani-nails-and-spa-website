@@ -4,7 +4,6 @@ dist/
 .astro/
 test-results/
 assets/images/
-public/images/
 *.log
 .env
 .env.local
