@@ -1,0 +1,63 @@
+# =============================================================================
+# Amani Nails & Spa — Cloudflare Worker Configuration
+# =============================================================================
+name = "amani-spa-api"
+main = "src/index.ts"
+compatibility_date = "2026-07-01"
+
+# ── D1 Database ─────────────────────────────────────────────────────────────
+# Create via: npx wrangler d1 create amani-spa
+# Apply migrations: npx wrangler d1 migrations apply amani-spa
+# Connect from Workers automatically via the DB binding below.
+# For local dev: npx wrangler d1 migrations apply amani-spa --local
+[[d1_databases]]
+binding = "DB"
+database_name = "amani-spa"
+database_id = ""
+migrations_dir = "migrations"
+
+# ── R2 Asset Storage ───────────────────────────────────────────────────────
+# Create via: npx wrangler r2 bucket create amani-spa-assets
+# Stores uploaded images, service photos, staff photos.
+[[r2_buckets]]
+binding = "ASSETS"
+bucket_name = "amani-spa-assets"
+
+# ── KV Namespace ───────────────────────────────────────────────────────────
+# Create via: npx wrangler kv namespace create amani-spa-kv
+# Used for rate limiting (key: ratelimit:<ip>:<path>) and session tokens.
+[[kv_namespaces]]
+binding = "KV"
+id = ""
+
+# ── Environment Variables (set via wrangler secret put) ─────────────────────
+# Secrets (use `npx wrangler secret put <NAME>` — DO NOT commit):
+#   TURNSTILE_SECRET       — Cloudflare Turnstile secret key
+#   RESEND_API_KEY         — Resend.com API key for transactional emails
+#   AFRICASTALKING_API_KEY — Africa's Talking API key for SMS/WhatsApp
+# Non-secret vars:
+[vars]
+TURNSTILE_SECRET = ""
+RESEND_API_KEY = ""
+AFRICASTALKING_API_KEY = ""
+
+# ── Cron Triggers ──────────────────────────────────────────────────────────
+# 8:00 AM daily — Send booking reminders for today's appointments
+# 12:00 PM daily — Send reminder for tomorrow's appointments
+[triggers]
+crons = ["0 8 * * *", "0 12 * * *"]
+
+# ── Logging ─────────────────────────────────────────────────────────────────
+# Logs are JSON-structured with level, timestamp, requestId, method, path,
+# status, and duration fields. View via `wrangler tail`.
+# Set log level via env var:
+[env.production]
+vars = { LOG_LEVEL = "info" }
+
+[env.preview]
+vars = { LOG_LEVEL = "debug" }
+
+# ── Routes (Custom Domain) ─────────────────────────────────────────────────
+# routes = [
+#   { pattern = "api.amanispanairobi.com/*", zone_id = "", custom_domain = true },
+# ]

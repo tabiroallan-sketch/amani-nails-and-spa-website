@@ -1,0 +1,75 @@
+---
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/services", label: "Services" },
+  { href: "/gallery", label: "Gallery" },
+  { href: "/about", label: "About" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/contact", label: "Contact" },
+];
+---
+
+<div class="lg:hidden">
+  <button
+    class="flex items-center justify-center w-10 h-10 text-espresso"
+    aria-label="Toggle menu"
+    id="mobile-menu-toggle"
+    type="button"
+    data-mobile-toggle
+  >
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-menu-icon>
+      <path d="M3 12h18M3 6h18M3 18h18" stroke-linecap="round" />
+    </svg>
+  </button>
+
+  <div
+    id="mobile-menu"
+    data-mobile-menu
+    class="fixed inset-x-0 top-20 z-50 hidden bg-ivory-silk/95 backdrop-blur-lg border-t border-gold-leaf/10 shadow-elevated"
+  >
+    <nav class="container-luxury py-8" aria-label="Mobile navigation">
+      <ul class="space-y-1">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="block font-body text-base text-espresso hover:text-gold-leaf py-3 px-4 rounded-[var(--radius-sm)] hover:bg-gold-leaf/5 transition-colors duration-[var(--duration-fast)]"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+        <li class="pt-4">
+          <a
+            href="/booking"
+            class="block text-center font-body text-sm font-semibold tracking-[0.05em] uppercase px-6 py-3 bg-gold-leaf text-espresso rounded-full hover:bg-espresso hover:text-ivory-silk transition-all duration-[var(--duration-normal)]"
+          >
+            Book Now
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<script>
+  const toggle = document.querySelector("[data-mobile-toggle]");
+  const menu = document.querySelector("[data-mobile-menu]");
+
+  if (toggle && menu) {
+    toggle.addEventListener("click", () => {
+      const isOpen = !menu.classList.contains("hidden");
+      menu.classList.toggle("hidden", isOpen);
+      toggle.setAttribute("aria-expanded", !isOpen);
+    });
+
+    menu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        menu.classList.add("hidden");
+        toggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
+</script>

@@ -1,0 +1,6 @@
+# ── Local Development Variables ─────────────────────────────────────────────
+# Copy to .dev.vars for `npx wrangler dev` to use local secrets.
+# These are NEVER deployed.
+TURNSTILE_SECRET=1x0000000000000000000000000000000AA
+RESEND_API_KEY=re_xxxxxxxxxxxx
+AFRICASTALKING_API_KEY=xxxxxxxxxxxx

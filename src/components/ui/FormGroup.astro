@@ -1,0 +1,32 @@
+---
+export interface Props {
+  name: string;
+  label?: string;
+  required?: boolean;
+  error?: string;
+  helperText?: string;
+  layout?: "vertical" | "horizontal";
+}
+
+const { name, label, required = false, error = "", helperText = "", layout = "vertical" } = Astro.props;
+
+const hasError = error.length > 0;
+const layoutClasses = layout === "horizontal" ? "sm:flex sm:items-start sm:gap-4" : "";
+const labelClasses = layout === "horizontal" ? "sm:w-32 sm:pt-3 sm:shrink-0" : "";
+---
+
+<div class={layoutClasses}>
+  {label && (
+    <div class={labelClasses}>
+      <label for={name} class={`block font-body text-sm font-medium mb-2 sm:mb-0 ${hasError ? "text-rose-gold-deep" : "text-charcoal"}`}>
+        {label}
+        {required && <span class="ml-1 text-rose-gold-deep" aria-hidden="true">*</span>}
+      </label>
+    </div>
+  )}
+  <div class="flex-1">
+    <slot />
+    {hasError && <p id={`${name}-error`} class="mt-1.5 text-sm text-rose-gold-deep" role="alert">{error}</p>}
+    {helperText && !hasError && <p class="mt-1.5 text-sm text-taupe">{helperText}</p>}
+  </div>
+</div>

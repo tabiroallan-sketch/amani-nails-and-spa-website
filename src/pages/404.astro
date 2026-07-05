@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../components/layout/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Page Not Found — Amani Nails & Spa | Nairobi Beauty & Wellness"
+  description="The page you're looking for is not available. Visit Amani Nails & Spa in Westlands, Nairobi for premium manicure, massage, and spa packages."
+  noindex={true}
+>
+  <section class="min-h-screen flex items-center justify-center bg-ivory-silk">
+    <div class="container-luxury text-center">
+      <p class="font-display text-[clamp(6rem,15vw,10rem)] font-semibold text-gold-leaf leading-none">404</p>
+      <h1 class="mt-4 font-display text-[clamp(1.5rem,3vw,2.5rem)] font-semibold text-espresso text-balance">
+        Page Not Found
+      </h1>
+      <p class="mt-4 font-body text-base text-warm-taupe max-w-md mx-auto">
+        The page you're looking for doesn't exist or has been moved. Let us help you find your way back to serenity.
+      </p>
+      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="/" class="inline-flex items-center px-8 py-4 bg-gold-leaf text-espresso font-body text-sm font-semibold tracking-[0.05em] uppercase rounded-full hover:bg-espresso transition-all">
+          Return Home
+        </a>
+        <a href="/booking" class="inline-flex items-center px-8 py-4 border border-gold-leaf text-gold-leaf font-body text-sm font-semibold tracking-[0.05em] uppercase rounded-full hover:bg-gold-leaf hover:text-espresso transition-all">
+          Book Now
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

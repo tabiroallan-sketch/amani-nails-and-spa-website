@@ -1,0 +1,32 @@
+# ── Amani Nails & Spa — Robots.txt ──────────────────────────────────────
+# https://amanispanairobi.com
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /book/placeholder
+Disallow: /api/
+Disallow: /_astro/
+
+# Crawl delay for polite crawling
+Crawl-Delay: 10
+
+# Sitemaps
+Sitemap: https://amanispanairobi.com/sitemap-index.xml
+
+# Google-specific
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+Disallow: /book/placeholder
+Disallow: /api/
+
+User-agent: Googlebot-Image
+Allow: /images/
+
+User-agent: Googlebot-Video
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/

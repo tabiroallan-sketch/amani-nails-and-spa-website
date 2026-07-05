@@ -1,0 +1,71 @@
+---
+export interface Props {
+  name: string;
+  label?: string;
+  variant?: "outlined" | "filled" | "flushed";
+  size?: "sm" | "md" | "lg";
+  placeholder?: string;
+  required?: boolean;
+  disabled?: boolean;
+  error?: string;
+  helperText?: string;
+  options?: { value: string; label: string; disabled?: boolean }[];
+}
+
+const {
+  name,
+  label,
+  variant = "outlined",
+  size = "md",
+  placeholder,
+  required = false,
+  disabled = false,
+  error = "",
+  helperText = "",
+  options = [],
+} = Astro.props;
+
+const base =
+  "w-full font-body appearance-none cursor-pointer transition-all duration-[var(--duration-normal)] ease-[var(--ease-luxury)] focus:outline-none disabled:opacity-40 disabled:cursor-not-allowed";
+
+const variants: Record<string, string> = {
+  outlined:
+    "bg-warm-white border border-taupe-light/40 focus:border-gold-leaf focus:shadow-[0_0_0_3px_rgba(201,168,108,0.1)]",
+  filled:
+    "bg-champagne-light border border-transparent focus:bg-warm-white focus:border-gold-leaf focus:shadow-[0_0_0_3px_rgba(201,168,108,0.1)]",
+  flushed:
+    "bg-transparent border-b border-taupe-light/40 px-0 focus:border-gold-leaf rounded-none",
+};
+
+const sizes: Record<string, string> = {
+  sm: "px-3 py-2 pr-8 text-sm rounded-[var(--radius-sm)]",
+  md: "px-4 py-3 pr-10 text-base rounded-[var(--radius-md)]",
+  lg: "px-5 py-4 pr-12 text-lg rounded-[var(--radius-md)]",
+};
+
+const hasError = error.length > 0;
+
+const selectClasses = `${base} ${variants[variant]} ${sizes[size]} ${hasError ? "border-rose-gold-deep focus:border-rose-gold-deep focus:shadow-[0_0_0_3px_rgba(201,138,142,0.15)]" : ""}`;
+---
+
+<div class="group relative">
+  {label && (
+    <label for={name} class={`block font-body text-sm font-medium mb-2 ${hasError ? "text-rose-gold-deep" : "text-charcoal"}`}>
+      {label}
+      {required && <span class="ml-1 text-rose-gold-deep" aria-hidden="true">*</span>}
+    </label>
+  )}
+  <div class="relative">
+    <select id={name} name={name} required={required} disabled={disabled} class={selectClasses} aria-invalid={hasError}>
+      {placeholder && <option value="" disabled selected>{placeholder}</option>}
+      {options.map((opt) => (
+        <option value={opt.value} disabled={opt.disabled}>{opt.label}</option>
+      ))}
+    </select>
+    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-warm-grey group-focus-within:text-gold-leaf transition-colors duration-[var(--duration-fast)]">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+  </div>
+  {hasError && <p id={`${name}-error`} class="mt-1.5 text-sm text-rose-gold-deep" role="alert">{error}</p>}
+  {helperText && !hasError && <p class="mt-1.5 text-sm text-taupe">{helperText}</p>}
+</div>

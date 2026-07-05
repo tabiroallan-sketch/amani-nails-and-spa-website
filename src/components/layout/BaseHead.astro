@@ -1,0 +1,50 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+}
+
+const { title, description = "Amani Nails & Spa — Where serenity meets sophistication. Premium nail care, massages, facials, and spa packages in Nairobi, Kenya.", image = "/og-image.webp" } = Astro.props;
+
+const siteTitle = title.includes("Amani") ? title : `${title} | Amani Nails & Spa`;
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{siteTitle}</title>
+<meta name="description" content={description} />
+
+<!-- Open Graph -->
+<meta property="og:title" content={siteTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={image} />
+<meta property="og:type" content="website" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={siteTitle} />
+<meta name="twitter:description" content={description} />
+
+<!-- SEO -->
+<link rel="canonical" href={Astro.url.href} />
+<meta name="robots" content="index, follow" />
+<meta name="geo.region" content="KE" />
+<meta name="geo.placename" content="Nairobi" />
+
+<!-- Icons -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="manifest" href="/manifest.json" />
+
+<!-- Service Worker -->
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js");
+  });
+}
+</script>
+
+<!-- Preconnect to analytics & CDN -->
+<link rel="preconnect" href="https://plausible.io" crossorigin="anonymous" />
+<link rel="preconnect" href="https://images.cloudflare.com" crossorigin="anonymous" />

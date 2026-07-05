@@ -1,0 +1,57 @@
+---
+import BaseLayout from "../components/layout/BaseLayout.astro";
+import { breadcrumbSchema, faqSchema, productSchema } from "../lib/seo";
+---
+
+<BaseLayout
+  title="Pricing — Amani Nails & Spa | Beauty & Wellness Prices in Nairobi (KES)"
+  description="Transparent pricing for all our premium services at Amani Nails & Spa in Nairobi. Manicure from KES 1,500, massage from KES 4,000, facials from KES 3,500, spa packages from KES 8,000. Book your appointment today."
+  schemas={[
+    breadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "Pricing", url: "/pricing" },
+    ]),
+    faqSchema([
+      { question: "What payment methods do you accept at your Nairobi salon?", answer: "We accept M-Pesa, credit/debit cards, and cash at our Westlands location. Bank transfers are accepted for spa packages and gift certificates." },
+      { question: "Do you offer gift certificates for your Nairobi spa?", answer: "Yes, we offer digital and physical gift certificates for any amount, redeemable across all services at our Westlands, Nairobi location." },
+      { question: "What is your cancellation policy?", answer: "We kindly ask for 24 hours notice for cancellations. Late cancellations may incur a 50% fee. No-shows are charged the full amount." },
+    ]),
+    productSchema("Spa Package — Amani Nails & Spa", "Luxury spa package at Amani Nails & Spa in Nairobi, Kenya. Includes massage, facial, and manicure or pedicure.", 8000),
+  ]}
+>
+  <section class="section-padding bg-ivory-silk pt-32">
+    <div class="container-luxury">
+      <div class="text-center max-w-2xl mx-auto">
+        <p class="font-body text-xs uppercase tracking-[0.2em] text-warm-taupe mb-4">
+          Investment
+        </p>
+        <h1 class="font-display text-[clamp(2rem,5vw,3.5rem)] font-semibold text-espresso text-balance">
+          Pricing
+        </h1>
+        <p class="mt-4 font-body text-base text-warm-taupe">
+          Premium care, transparent pricing. All prices in Kenyan Shillings (KES).
+        </p>
+      </div>
+
+      <div class="mt-16 max-w-3xl mx-auto space-y-4">
+        {[{ category: "Nail Services — Manicure, Pedicure & Nail Art in Nairobi", items: ["Manicure – KES 1,500", "Pedicure – KES 2,000", "Gel Polish – KES 2,500", "Acrylic Nails – KES 3,500", "Nail Art – from KES 1,000"] },
+          { category: "Massage Therapy in Nairobi — Swedish, Deep Tissue & Hot Stone", items: ["Swedish Massage – KES 4,000", "Deep Tissue Massage – KES 5,000", "Hot Stone Massage – KES 6,000"] },
+          { category: "Skincare, Facials & Body Treatments in Nairobi", items: ["Facials – from KES 3,500", "Body Scrubs – KES 4,500", "Waxing – from KES 1,500"] },
+          { category: "Eye Services & Piercing in Nairobi", items: ["Eyebrow Shaping – KES 800", "Eyelash Extensions – KES 3,000", "Ear Piercing – KES 1,500", "Nose Piercing – KES 2,000"] },
+          { category: "Spa Packages & Experiences in Nairobi", items: ["Spa Packages – from KES 8,000"] }].map(({ category, items }) => (
+          <div class="rounded-[var(--radius-card)] bg-ivory-silk p-6">
+            <h2 class="font-display text-lg font-semibold text-warm-taupe mb-4">{category}</h2>
+            <ul class="space-y-2">
+              {items.map((item) => (
+                <li class="flex justify-between font-body text-sm text-espresso py-1 border-b border-champagne last:border-0">
+                  <span>{item.split(" – ")[0]}</span>
+                  <span class="font-medium">{item.split(" – ")[1]}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

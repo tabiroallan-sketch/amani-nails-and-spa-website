@@ -1,0 +1,76 @@
+---
+import Image from "../../ui/Image.astro";
+
+const images = [
+  { src: "/images/gallery/interior-1.webp", alt: "Elegant nail atelier with modern manicure stations, designer lighting, and plush seating at Amani Nails & Spa in Nairobi", span: "col-span-1 row-span-1" },
+  { src: "/images/gallery/interior-2.webp", alt: "Professional nail art station with organised polish displays and premium salon equipment in Westlands, Nairobi", span: "col-span-1 row-span-1" },
+  { src: "/images/gallery/interior-3.webp", alt: "Serene massage therapy room with heated treatment bed, soft ambient lighting, and tranquil decor", span: "col-span-1 row-span-2" },
+  { src: "/images/gallery/interior-4.webp", alt: "Spa relaxation area with comfortable lounge seating, calming wall art, and warm neutral tones", span: "col-span-1 row-span-1" },
+  { src: "/images/gallery/interior-5.webp", alt: "Elegant reception and welcome area at Amani Nails & Spa with modern check-in desk and luxury finishes", span: "col-span-2 row-span-1" },
+];
+---
+
+<section class="section-padding bg-champagne-light overflow-hidden" data-animate>
+  <div class="container-luxury">
+    <div class="text-center max-w-2xl mx-auto">
+      <p class="font-body text-xs uppercase tracking-[0.2em] text-taupe-warm mb-4">
+        Our Space
+      </p>
+      <h2 class="font-display text-[clamp(1.75rem,4vw,3rem)] font-semibold text-espresso text-balance">
+        A Glimpse Inside <span class="gradient-text-gold">Amani</span>
+      </h2>
+      <p class="mt-4 font-body text-base text-taupe">
+        Step into our sanctuary. Every corner of Amani is designed to evoke
+        serenity, warmth, and uncompromising elegance.
+      </p>
+    </div>
+
+    <div
+      class="mt-14 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[160px] md:auto-rows-[200px]"
+      data-animate-stagger
+    >
+      {images.map((img) => (
+        <a
+          href="/gallery"
+          class={`group relative overflow-hidden rounded-[var(--radius-md)] bg-champagne shadow-soft transition-all duration-[var(--duration-normal)] ease-[var(--ease-luxury)] hover:shadow-elevated ${img.span}`}
+        >
+          <Image
+            src={img.src}
+            alt={img.alt}
+            class="absolute inset-0 w-full h-full object-cover transition-all duration-[var(--duration-normal)] group-hover:scale-105"
+          />
+
+          <div
+            class="absolute inset-0 bg-espresso/0 transition-all duration-[var(--duration-normal)] group-hover:bg-espresso/40"
+          />
+
+          <div class="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-[var(--duration-normal)] group-hover:opacity-100">
+            <div class="flex h-12 w-12 items-center justify-center rounded-full bg-gold-leaf/90 text-espresso backdrop-blur-sm transition-transform duration-[var(--duration-normal)] group-hover:scale-110">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+          </div>
+
+          <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full transition-transform duration-[var(--duration-normal)] group-hover:translate-y-0">
+            <p class="font-body text-xs text-white/90 font-medium">{img.alt}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="mt-10 text-center" data-animate>
+      <a
+        href="/gallery"
+        class="inline-flex items-center gap-2 font-body text-sm font-semibold tracking-[0.05em] uppercase text-gold-leaf hover:text-espresso transition-colors duration-[var(--duration-fast)] group"
+      >
+        View Full Gallery
+        <svg
+          class="h-4 w-4 transition-transform duration-[var(--duration-fast)] group-hover:translate-x-1"
+          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        >
+          <line x1="5" y1="12" x2="19" y2="12" />
+          <polyline points="12 5 19 12 12 19" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

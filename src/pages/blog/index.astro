@@ -1,0 +1,58 @@
+---
+import BaseLayout from "../../components/layout/BaseLayout.astro";
+import Image from "../../components/ui/Image.astro";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("blog");
+posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+---
+
+<BaseLayout
+  title="Blog"
+  description="Discover beauty tips, wellness advice, and spa inspiration from the Amani Nails & Spa team in Nairobi."
+>
+  <section class="section-padding bg-ivory-silk pt-32">
+    <div class="container-luxury">
+      <div class="text-center max-w-2xl mx-auto">
+        <p class="font-body text-xs uppercase tracking-[0.2em] text-warm-taupe mb-4">
+          Journal
+        </p>
+        <h1 class="font-display text-[clamp(2rem,5vw,3.5rem)] font-semibold text-espresso text-balance">
+          Beauty & Wellness Journal
+        </h1>
+        <p class="mt-4 font-body text-base text-warm-taupe">
+          Tips, stories, and inspiration from the Amani team.
+        </p>
+      </div>
+
+      <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {posts.length > 0 ? posts.map((post) => (
+          <article class="group rounded-[var(--radius-card)] bg-champagne overflow-hidden">
+            <div class="aspect-[16/9] bg-ivory-silk overflow-hidden">
+              {post.data.image && (
+                <Image src={post.data.image} alt={`${post.data.title} — Amani Nails & Spa beauty and wellness journal`} class="w-full h-full object-cover" />
+              )}
+            </div>
+            <div class="p-6">
+              <p class="font-body text-xs text-warm-taupe uppercase tracking-[0.1em]">
+                {post.data.date}
+              </p>
+              <h2 class="mt-2 font-display text-xl font-semibold text-espresso group-hover:text-gold-leaf transition-colors">
+                <a href={`/blog/${post.slug}`}>
+                  {post.data.title}
+                </a>
+              </h2>
+              <p class="mt-2 font-body text-sm text-warm-taupe line-clamp-2">
+                {post.data.description}
+              </p>
+            </div>
+          </article>
+        )) : (
+          <p class="font-body text-sm text-warm-taupe col-span-full text-center py-12">
+            Journal entries coming soon.
+          </p>
+        )}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

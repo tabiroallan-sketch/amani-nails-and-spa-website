@@ -1,0 +1,73 @@
+---
+export interface Props {
+  href?: string;
+  variant?: "primary" | "secondary" | "outline" | "ghost" | "link";
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  fullWidth?: boolean;
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
+  loading?: boolean;
+  iconLeft?: boolean;
+  iconRight?: boolean;
+}
+
+const {
+  href,
+  variant = "primary",
+  size = "md",
+  fullWidth = false,
+  type = "button",
+  disabled = false,
+  loading = false,
+  iconLeft = false,
+  iconRight = false,
+} = Astro.props;
+
+const base =
+  "inline-flex items-center justify-center font-body font-semibold leading-none tracking-[0.05em] uppercase transition-all duration-[var(--duration-normal)] ease-[var(--ease-luxury)] select-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-leaf disabled:pointer-events-none disabled:opacity-40";
+
+const variants: Record<string, string> = {
+  primary:
+    "bg-gold-leaf text-espresso shadow-soft hover:bg-espresso hover:text-ivory-silk hover:shadow-elevated active:scale-[0.98]",
+  secondary:
+    "bg-espresso text-ivory-silk shadow-soft hover:bg-charcoal hover:shadow-elevated active:scale-[0.98]",
+  outline:
+    "border border-gold-leaf text-gold-leaf bg-transparent hover:bg-gold-leaf hover:text-espresso active:scale-[0.98]",
+  ghost:
+    "text-gold-leaf bg-transparent hover:bg-gold-leaf/10 active:scale-[0.98]",
+  link: "text-gold-leaf underline-offset-4 hover:underline underline decoration-gold-leaf/30 hover:decoration-gold-leaf",
+};
+
+const sizes: Record<string, string> = {
+  xs: "px-4 py-1.5 text-[10px]",
+  sm: "px-5 py-2.5 text-xs",
+  md: "px-8 py-4 text-sm",
+  lg: "px-10 py-5 text-sm",
+  xl: "px-12 py-6 text-base",
+};
+
+const loadingSpinner = `<svg class="animate-spin -ml-1 mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`;
+
+const classes = `${base} ${variants[variant]} ${sizes[size]} ${fullWidth ? "w-full" : ""}`;
+
+const Tag = href ? "a" : "button";
+const tagProps = href ? { href } : { type, disabled: disabled || loading };
+---
+
+{
+  href ? (
+    <a href={href} class={classes}>
+      {loading && <span set:html={loadingSpinner} />}
+      {iconLeft && !loading && <span class="mr-2"><slot name="icon-left"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></slot></span>}
+      <slot />
+      {iconRight && <span class="ml-2"><slot name="icon-right"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></slot></span>}
+    </a>
+  ) : (
+    <button type={type} disabled={disabled || loading} class={classes}>
+      {loading && <span set:html={loadingSpinner} />}
+      {iconLeft && !loading && <span class="mr-2"><slot name="icon-left"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></slot></span>}
+      <slot />
+      {iconRight && <span class="ml-2"><slot name="icon-right"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></slot></span>}
+    </button>
+  )
+}

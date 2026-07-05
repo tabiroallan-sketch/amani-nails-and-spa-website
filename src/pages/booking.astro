@@ -1,0 +1,68 @@
+---
+import BaseLayout from "../components/layout/BaseLayout.astro";
+import { breadcrumbSchema } from "../lib/seo";
+import BookingWidget from "../components/sections/BookingWidget.tsx";
+import { getCollection } from "astro:content";
+
+const servicesCollection = await getCollection("services");
+const teamCollection = await getCollection("team");
+
+const services = servicesCollection.map((s) => ({
+  id: s.slug,
+  slug: s.slug,
+  title: s.data.title,
+  category: s.data.category,
+  description: s.data.description || "",
+  duration: s.data.duration,
+  price: s.data.price,
+}));
+
+const staff = teamCollection.map((s) => ({
+  id: s.slug,
+  name: s.data.name,
+  title: s.data.title,
+  image: s.data.image,
+  specialties: [],
+})).sort((a, b) => {
+  const order = { esther: 1, grace: 2, faith: 3, james: 4 };
+  return (order[a.id] || 99) - (order[b.id] || 99);
+});
+---
+
+<BaseLayout
+  title="Book Appointment — Amani Nails & Spa | Nairobi Beauty & Wellness Booking"
+  description="Book your appointment at Amani Nails & Spa in Westlands, Nairobi. Choose from manicure, pedicure, massage, facials, and spa packages. Simple, secure, instant confirmation."
+  schemas={[
+    breadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "Book Appointment", url: "/booking" },
+    ]),
+  ]}
+>
+  <section class="relative overflow-hidden bg-ivory-silk pt-32 pb-8">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(201,168,108,0.06),transparent_50%),radial-gradient(ellipse_at_bottom_right,_rgba(232,180,184,0.04),transparent_50%)] pointer-events-none" />
+    <div class="container-luxury relative z-10">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <p class="font-accent text-xs uppercase tracking-[0.2em] text-warm-taupe mb-4">
+          Reserve Your Moment
+        </p>
+        <h1 class="font-display text-[clamp(2rem,5vw,3.5rem)] font-semibold text-espresso text-balance leading-[1.1]">
+          Book Your <span class="gradient-text-gold">Appointment</span>
+        </h1>
+        <p class="mt-4 font-body text-base text-warm-taupe max-w-lg mx-auto">
+          Choose your service, select your specialist, pick your time — we'll handle the rest.
+        </p>
+      </div>
+
+      <div class="max-w-3xl mx-auto">
+        <BookingWidget client:load services={services} staff={staff} />
+      </div>
+
+      <div class="mt-8 text-center">
+        <p class="font-body text-xs text-warm-taupe/60">
+          Secured with Cloudflare Turnstile. Your information is encrypted and never shared.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

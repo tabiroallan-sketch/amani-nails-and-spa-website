@@ -1,0 +1,54 @@
+---
+import BaseLayout from "../components/layout/BaseLayout.astro";
+import { breadcrumbSchema, faqSchema } from "../lib/seo";
+import { config } from "../lib/config";
+
+import ContactHero from "../components/sections/contact/ContactHero.astro";
+import ContactInfo from "../components/sections/contact/ContactInfo.astro";
+import BusinessHours from "../components/sections/contact/BusinessHours.astro";
+import DirectionsSection from "../components/sections/contact/DirectionsSection.astro";
+import ContactFAQ from "../components/sections/contact/ContactFAQ.astro";
+import SocialSection from "../components/sections/contact/SocialSection.astro";
+import ContactCTA from "../components/sections/contact/ContactCTA.astro";
+import ContactForm from "../components/sections/contact/ContactForm.tsx";
+---
+
+<BaseLayout
+  title="Contact — Amani Nails & Spa | Westlands, Nairobi"
+  description="Visit Amani Nails & Spa in Westlands, Nairobi. Get directions, view our business hours, contact us via phone or WhatsApp, or send us a message. Book your appointment for manicure, massage, or spa packages today."
+  schemas={[
+    breadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "Contact", url: "/contact" },
+    ]),
+    faqSchema([
+      { question: "Where is Amani Nails & Spa located in Nairobi?", answer: "We are located at Westlands Business Park, Waiyaki Way, Nairobi, Kenya. We're easily accessible from Kilimani, Lavington, Karen, and the Nairobi CBD." },
+      { question: "What are your business hours?", answer: "We are open Monday to Saturday from 8:00 AM to 8:00 PM, and Sunday from 10:00 AM to 6:00 PM." },
+      { question: "How can I book an appointment?", answer: "You can book online through our website, call +254 700 000 000, message us on WhatsApp, or visit our Westlands location in person." },
+      { question: "Do you offer walk-in services?", answer: "Yes, we welcome walk-ins subject to availability. However, we recommend booking in advance, especially for weekends and popular services like gel nails, deep tissue massage, and spa packages." },
+    ]),
+  ]}
+>
+  <ContactHero />
+
+  <ContactInfo />
+
+  <BusinessHours />
+
+  <!-- Contact Form Section -->
+  <section class="section-padding bg-warm-white overflow-hidden" id="contact-form" data-animate>
+    <div class="container-luxury">
+      <div class="max-w-2xl mx-auto">
+        <ContactForm client:load turnstileKey={config.turnstileKey} />
+      </div>
+    </div>
+  </section>
+
+  <DirectionsSection />
+
+  <ContactFAQ />
+
+  <SocialSection />
+
+  <ContactCTA />
+</BaseLayout>

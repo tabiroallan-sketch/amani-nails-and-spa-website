@@ -1,0 +1,54 @@
+---
+export interface Props {
+  variant?: "default" | "gold" | "rose" | "charcoal" | "outline" | "ghost";
+  size?: "sm" | "md" | "lg";
+  dot?: boolean;
+  removable?: boolean;
+  as?: string;
+}
+
+const {
+  variant = "default",
+  size = "md",
+  dot = false,
+  removable = false,
+  as: Tag = "span",
+} = Astro.props;
+
+const base =
+  "inline-flex items-center gap-1.5 font-body font-medium leading-none whitespace-nowrap transition-all duration-[var(--duration-fast)] ease-[var(--ease-luxury)]";
+
+const variants: Record<string, string> = {
+  default: "bg-champagne text-espresso",
+  gold: "bg-gold-leaf text-ivory-silk",
+  rose: "bg-rose-gold text-espresso",
+  charcoal: "bg-charcoal text-warm-white",
+  outline: "border border-gold-leaf text-gold-leaf bg-transparent",
+  ghost: "text-taupe-warm bg-transparent",
+};
+
+const sizes: Record<string, string> = {
+  sm: "px-2 py-0.5 text-[10px] tracking-wider uppercase",
+  md: "px-3 py-1 text-xs tracking-wider uppercase",
+  lg: "px-4 py-1.5 text-sm tracking-wider uppercase",
+};
+
+const classes = `${base} ${variants[variant]} ${sizes[size]} rounded-full`;
+---
+
+<Tag class={classes}>
+  {dot && <span class="h-1.5 w-1.5 rounded-full bg-current opacity-60" />}
+  <slot />
+  {removable && (
+    <button
+      type="button"
+      class="ml-0.5 inline-flex items-center justify-center rounded-full p-0.5 hover:bg-black/10 transition-colors"
+      aria-label="Remove"
+    >
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  )}
+</Tag>

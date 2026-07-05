@@ -1,0 +1,78 @@
+---
+export interface Props {
+  name: string;
+  label?: string;
+  placeholder?: string;
+  variant?: "outlined" | "filled" | "flushed";
+  size?: "sm" | "md" | "lg";
+  rows?: number;
+  required?: boolean;
+  disabled?: boolean;
+  readonly?: boolean;
+  error?: string;
+  helperText?: string;
+  maxLength?: number;
+  value?: string;
+}
+
+const {
+  name,
+  label,
+  variant = "outlined",
+  size = "md",
+  rows = 4,
+  placeholder,
+  required = false,
+  disabled = false,
+  readonly = false,
+  error = "",
+  helperText = "",
+  maxLength,
+  value,
+} = Astro.props;
+
+const base =
+  "w-full font-body resize-y transition-all duration-[var(--duration-normal)] ease-[var(--ease-luxury)] placeholder:text-warm-grey/50 focus:outline-none disabled:opacity-40 disabled:cursor-not-allowed";
+
+const variants: Record<string, string> = {
+  outlined:
+    "bg-warm-white border border-taupe-light/40 focus:border-gold-leaf focus:shadow-[0_0_0_3px_rgba(201,168,108,0.1)]",
+  filled:
+    "bg-champagne-light border border-transparent focus:bg-warm-white focus:border-gold-leaf focus:shadow-[0_0_0_3px_rgba(201,168,108,0.1)]",
+  flushed:
+    "bg-transparent border-b border-taupe-light/40 px-0 focus:border-gold-leaf rounded-none",
+};
+
+const sizes: Record<string, string> = {
+  sm: "px-3 py-2 text-sm rounded-[var(--radius-sm)]",
+  md: "px-4 py-3 text-base rounded-[var(--radius-md)]",
+  lg: "px-5 py-4 text-lg rounded-[var(--radius-md)]",
+};
+
+const hasError = error.length > 0;
+
+const textareaClasses = `${base} ${variants[variant]} ${sizes[size]} ${hasError ? "border-rose-gold-deep focus:border-rose-gold-deep focus:shadow-[0_0_0_3px_rgba(201,138,142,0.15)]" : ""}`;
+---
+
+<div class="group relative">
+  {label && (
+    <label for={name} class={`block font-body text-sm font-medium mb-2 ${hasError ? "text-rose-gold-deep" : "text-charcoal"}`}>
+      {label}
+      {required && <span class="ml-1 text-rose-gold-deep" aria-hidden="true">*</span>}
+    </label>
+  )}
+  <textarea
+    id={name}
+    name={name}
+    rows={rows}
+    placeholder={placeholder}
+    required={required}
+    disabled={disabled}
+    readonly={readonly}
+    maxlength={maxLength}
+    class={textareaClasses}
+    aria-invalid={hasError}
+  >{value}</textarea>
+  {hasError && <p id={`${name}-error`} class="mt-1.5 text-sm text-rose-gold-deep" role="alert">{error}</p>}
+  {helperText && !hasError && <p class="mt-1.5 text-sm text-taupe">{helperText}</p>}
+</div>

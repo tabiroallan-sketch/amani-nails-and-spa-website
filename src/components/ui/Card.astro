@@ -1,0 +1,39 @@
+---
+export interface Props {
+  variant?: "default" | "elevated" | "glass" | "bordered" | "flat";
+  padding?: "none" | "sm" | "md" | "lg" | "xl";
+  hover?: "lift" | "glow" | "none";
+}
+
+const { variant = "default", padding = "md", hover = "lift" } = Astro.props;
+
+const base = "transition-all duration-[var(--duration-normal)] ease-[var(--ease-luxury)]";
+
+const variants: Record<string, string> = {
+  default: "bg-warm-white shadow-soft",
+  elevated: "bg-warm-white shadow-elevated",
+  glass: "glass",
+  bordered: "bg-warm-white border border-champagne/50",
+  flat: "bg-champagne-light",
+};
+
+const paddings: Record<string, string> = {
+  none: "",
+  sm: "p-4",
+  md: "p-6",
+  lg: "p-8",
+  xl: "p-10",
+};
+
+const hovers: Record<string, string> = {
+  lift: "hover:-translate-y-1 hover:shadow-elevated",
+  glow: "hover:shadow-glow-gold",
+  none: "",
+};
+
+const classes = `${base} ${variants[variant]} ${paddings[padding]} ${hovers[hover]} rounded-[var(--radius-card)]`;
+---
+
+<article class={classes}>
+  <slot />
+</article>

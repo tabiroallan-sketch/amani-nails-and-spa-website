@@ -1,0 +1,52 @@
+# Amani Nails & Spa — Image Map
+# Generated: 2026-07-05
+# Total: 47 images
+
+# Format: relative/path|alt|source
+services/manicure.webp|Luxury manicure treatment with nail polish application at a professional salon|Pexels / Gustavo Fring
+services/pedicure.webp|Relaxing pedicure session with rose petals and warm water soak|Pexels / Ron Lach
+services/nail-art.webp|Intricate nail art design with hand-painted floral patterns|Pexels / Karolina Grabowska
+services/gel-polish.webp|High-shine gel polish application with UV lamp curing process|Pexels / Ron Lach
+services/gel-manicure.webp|Professional gel manicure with mirror finish and cuticle care|Pexels / Ron Lach
+services/acrylic-nails.webp|Custom acrylic nail extensions with almond shape and French tip design|Pexels / Ron Lach
+services/massages.webp|Therapeutic full-body massage in a serene spa treatment room|Pexels / Anna Shvets
+services/swedish-massage.webp|Gentle Swedish massage with long gliding strokes and aromatherapy oils|Pexels / cottonbro studio
+services/deep-tissue.webp|Deep tissue massage therapy targeting muscle tension and chronic pain relief|Pexels / Anna Shvets
+services/hot-stone-massage.webp|Hot stone massage with heated basalt stones placed on the back for deep relaxation|Pexels / Andrea Piacquadio
+services/facials.webp|Luxurious facial treatment with natural face mask and steam therapy|Pexels / KoolShooters
+services/body-scrubs.webp|Full-body exfoliation scrub treatment with natural sea salt ingredients|Pexels / Anna Shvets
+services/waxing.webp|Professional waxing service with gentle technique on sensitive skin|Pexels / Ron Lach
+services/eyebrow-shaping.webp|Precision eyebrow threading and shaping by a professional aesthetician|Pexels / Albin Berlin
+services/eyelash-extensions.webp|Semi-permanent eyelash extensions application for voluminous natural lashes|Pexels / Rannvas stock
+services/ear-piercing.webp|Professional ear piercing service with sterilised equipment and premium starter jewellery|Pexels / Karolina Grabowska
+services/nose-piercing.webp|Nostril piercing with precision placement and hypoallergenic gold jewellery|Pexels / cottonbro studio
+services/spa-packages.webp|Luxury spa package experience with candles, flowers, and premium wellness treatments|Pexels / Ron Lach
+gallery/3d-nail-sculpting.webp|Sculpted 3D butterfly nail art with Swarovski crystal accents and chrome finish|Pexels / Karolina Grabowska
+gallery/acrylic-artistry.webp|Custom acrylic nails with ombre gradient and gold foil accent design|Pexels / Ron Lach
+gallery/acrylic-renewal-before.webp|Overgrown acrylic nails before professional renewal and reshaping treatment|Pexels / Karolina Grabowska
+gallery/acrylic-renewal-after.webp|Sleek modern almond-shaped acrylic nails after professional renewal service|Pexels / Karolina Grabowska
+gallery/aromatherapy-massage.webp|Essential oil aromatherapy massage with warm towels and calming herbal tea|Pexels / Anna Shvets
+gallery/candle-lit-relaxation.webp|Warm candlelit ambiance with glowing candles designed for deep relaxation and serenity|Pexels / Ron Lach
+gallery/deep-tissue-therapy.webp|Therapeutic deep tissue massage using elbow and forearm techniques in a tranquil room|Pexels / Karolina Grabowska
+gallery/floral-masterpiece.webp|Hand-painted 3D floral nail design with rose gold chrome detailing and gems|Pexels / Ron Lach
+gallery/gel-polish-marble.webp|White marble-effect gel polish with subtle gold veining on natural nails|Pexels / Ron Lach
+gallery/minimal-elegance.webp|Clean negative-space nail art with delicate gold line work on natural nails|Pexels / Ron Lach
+gallery/nail-transformation-before.webp|Brittle and damaged natural nails before complete restoration treatment|Pexels / Ron Lach
+gallery/nail-transformation-after.webp|Healthy elegant nails after complete restoration and professional nail care treatment|Pexels / Ron Lach
+gallery/pedicure-paradise.webp|Luxury spa pedicure with exfoliating scrub and champagne gold polish finish|Pexels / Karolina Grabowska
+gallery/salon-lounge.webp|Elegant salon waiting lounge with champagne bar and curated art pieces|Pexels / Moose Photos
+gallery/spa-suite.webp|Signature spa suite with ambient candlelight, plush towels, and calming neutral tones|Pexels / Karolina Grabowska
+gallery/treatment-room.webp|Private treatment room featuring heated therapy bed and soft ambient lighting|Pexels / Karolina Grabowska
+gallery/interior-1.webp|Elegant nail atelier with modern manicure stations and designer lighting fixtures|Pexels / Karolina Grabowska
+gallery/interior-2.webp|Modern nail art station with organised polish displays and professional equipment|Pexels / RDNE Stock project
+gallery/interior-3.webp|Serene massage therapy room with heated treatment bed and tranquil decor|Pexels / RDNE Stock project
+gallery/interior-4.webp|Spa relaxation area with comfortable lounge seating and calming wall art|Pexels / Karolina Grabowska
+gallery/interior-5.webp|Elegant reception and welcome area with modern check-in desk|Pexels / Ron Lach
+team/esther.webp|Esther Wanjiku — professional nail artist with CIDESCO certification and a decade of experience|Pexels / Andrea Piacquadio
+team/faith.webp|Faith Akinyi — aesthetician and waxing specialist providing gentle professional skincare treatments|Pexels / Ron Lach
+team/grace.webp|Grace Muthoni — senior massage therapist specialising in deep tissue and hot stone therapy|Pexels / Andrea Piacquadio
+team/james.webp|James Ochieng — spa director and lead therapist overseeing premium wellness experiences|Pexels / Ron Lach
+blog/bridal-guide.webp|Bridal spa preparation with rose petals, champagne, and luxury relaxation treatment|Pexels / Ron Lach
+blog/deep-tissue-signs.webp|Therapeutic deep tissue massage session relieving chronic tension and muscle pain|Pexels / Andrea Piacquadio
+blog/nail-care-humidity.webp|Professional nail care treatment with hydrating cuticle oil and polish application|Pexels / Karolina Grabowska
+og-image.webp|Amani Nails & Spa — Nairobi's premier luxury beauty and wellness sanctuary|Pexels / Karolina Grabowska

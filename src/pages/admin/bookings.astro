@@ -1,0 +1,19 @@
+---
+import { AdminAuthProvider } from "../../components/admin/AdminAuth";
+import AdminBookings from "../../components/admin/AdminBookings";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bookings — Amani Admin</title>
+    <meta name="robots" content="noindex, nofollow" />
+  </head>
+  <body>
+    <AdminAuthProvider>
+      <AdminBookings client:only="preact" />
+    </AdminAuthProvider>
+  </body>
+</html>

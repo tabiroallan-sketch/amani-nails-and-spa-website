@@ -1,0 +1,100 @@
+---
+export interface Props {
+  title: string;
+  price: string;
+  period?: string;
+  description?: string;
+  features: string[];
+  cta?: string;
+  ctaHref?: string;
+  popular?: boolean;
+  variant?: "light" | "dark" | "gold";
+  featured?: boolean;
+}
+
+const {
+  title,
+  price,
+  period = "per session",
+  description,
+  features,
+  cta = "Book Now",
+  ctaHref = "#",
+  popular = false,
+  variant = "light",
+  featured = false,
+} = Astro.props;
+
+const variantStyles: Record<string, { card: string; title: string; price: string; desc: string; cta: string; }> = {
+  light: {
+    card: "bg-warm-white shadow-soft",
+    title: "text-espresso",
+    price: "text-gold-leaf",
+    desc: "text-taupe",
+    cta: "bg-gold-leaf text-espresso hover:bg-espresso hover:text-ivory-silk",
+  },
+  dark: {
+    card: "bg-espresso shadow-luxury",
+    title: "text-ivory-silk",
+    price: "text-champagne-gold",
+    desc: "text-taupe-light",
+    cta: "bg-champagne-gold text-espresso hover:bg-gold-leaf hover:text-espresso",
+  },
+  gold: {
+    card: "bg-gradient-to-br from-champagne-light to-warm-white border border-gold-leaf/20",
+    title: "text-espresso",
+    price: "text-gold-leaf-dark",
+    desc: "text-taupe-warm",
+    cta: "bg-gold-leaf-dark text-ivory-silk hover:bg-espresso hover:text-ivory-silk",
+  },
+};
+
+const s = variantStyles[variant];
+
+const Tag = featured ? "section" : "div";
+const featuredLabel = featured ? "itemprop=\"offers\" itemscope itemtype=\"https://schema.org/Offer\"" : "";
+---
+
+<Tag
+  class={`relative flex flex-col rounded-[var(--radius-2xl)] p-8 md:p-10 transition-all duration-[var(--duration-normal)] ease-[var(--ease-luxury)] hover:-translate-y-1 ${s.card} ${popular ? "ring-2 ring-gold-leaf shadow-elevated" : "hover:shadow-elevated"}`}
+  {...featured ? { "itemprop": "offers", "itemscope": true, "itemtype": "https://schema.org/Offer" } : {}}
+>
+  {popular && (
+    <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+      <span class="inline-flex items-center gap-1.5 gradient-gold text-espresso text-[10px] font-accent font-semibold tracking-[0.15em] uppercase px-4 py-1.5 rounded-full shadow-soft">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        Most Popular
+      </span>
+    </div>
+  )}
+
+  <div class="mb-6">
+    <h3 class={`font-display text-xl md:text-2xl font-semibold ${s.title}`}>{title}</h3>
+    {description && <p class={`mt-2 font-body text-sm ${s.desc}`}>{description}</p>}
+  </div>
+
+  <div class="mb-8">
+    <span class={`font-display text-4xl md:text-5xl font-bold tracking-tight ${s.price}`} itemprop="price" content={price.replace(/[^0-9]/g, '')}>
+      {price}
+    </span>
+    <span class={`ml-1.5 font-body text-sm ${s.desc}`}>{period}</span>
+  </div>
+
+  <ul class="mb-10 flex-1 space-y-3.5" role="list">
+    {features.map((feature) => (
+      <li class="flex items-start gap-3 font-body text-sm text-charcoal">
+        <svg class="mt-0.5 h-4 w-4 shrink-0 text-gold-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+        <span>{feature}</span>
+      </li>
+    ))}
+  </ul>
+
+  <a
+    href={ctaHref}
+    class={`inline-flex items-center justify-center w-full px-8 py-4 font-body text-sm font-semibold tracking-[0.05em] uppercase rounded-full transition-all duration-[var(--duration-normal)] ease-[var(--ease-luxury)] shadow-soft hover:shadow-elevated active:scale-[0.98] ${s.cta}`}
+  >
+    {cta}
+  </a>
+</Tag>

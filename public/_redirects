@@ -1,0 +1,7 @@
+# Cloudflare Pages redirects
+/instagram  https://instagram.com/amanispanairobi               301
+/whatsapp   https://wa.me/254700000000?text=Hi%20Amani%20Spa!  301
+/facebook   https://facebook.com/amanispanairobi                301
+/tiktok     https://tiktok.com/@amanispanairobi                 301
+/booking    /booking                                            200
+/contact    /contact                                            200

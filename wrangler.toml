@@ -1,0 +1,32 @@
+# =============================================================================
+# Amani Nails & Spa — Cloudflare Pages Configuration
+# =============================================================================
+# This file configures the Cloudflare Pages project for the frontend.
+# The API worker has its own config at workers/api/wrangler.toml.
+# =============================================================================
+
+# Pages project name
+name = "amani-spa"
+
+# Build configuration (also set in Cloudflare Pages dashboard)
+[build]
+command = "npm run build"
+output = "dist/"
+
+# Environment variables for the Pages build
+[build.environment]
+NODE_VERSION = "22"
+
+# Production branch
+[env.production]
+pattern = "main"
+
+# Preview branches
+[env.preview]
+pattern = "*"
+
+# Route the API subdomain to the worker
+[[routes]]
+pattern = "api.amanispanairobi.com"
+zone_id = ""
+custom_domain = true

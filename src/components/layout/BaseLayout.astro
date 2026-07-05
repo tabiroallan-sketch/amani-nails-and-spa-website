@@ -1,0 +1,53 @@
+---
+import PageSeo from "../seo/PageSeo.astro";
+import Header from "./Header.astro";
+import Footer from "./Footer.astro";
+import SmoothScrollSetup from "../sections/SmoothScrollSetup.tsx";
+import ScrollAnimations from "../sections/ScrollAnimations.tsx";
+import AnimationEffects from "../sections/AnimationEffects.tsx";
+import WhatsAppButton from "./WhatsAppButton.astro";
+import type { PageMeta } from "../../lib/seo";
+import "../../styles/fonts.css";
+import "../../styles/base.css";
+
+export interface Props extends PageMeta {
+  schemas?: Record<string, unknown>[];
+}
+
+const { title, description, image, type, keywords, noindex, canonical, publishedTime, author, schemas } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en-KE">
+  <head>
+    <PageSeo
+      {title}
+      {description}
+      {image}
+      {type}
+      {keywords}
+      {noindex}
+      {canonical}
+      {publishedTime}
+      {author}
+      schemas={schemas ?? []}
+    />
+  </head>
+  <body>
+    <SmoothScrollSetup client:visible />
+    <ScrollAnimations client:visible />
+    <AnimationEffects client:visible />
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <Header />
+
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <Footer />
+
+    <WhatsAppButton />
+  </body>
+</html>

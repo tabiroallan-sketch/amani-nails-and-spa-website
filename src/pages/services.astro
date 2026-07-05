@@ -1,0 +1,278 @@
+---
+import BaseLayout from "../components/layout/BaseLayout.astro";
+import Image from "../components/ui/Image.astro";
+import { breadcrumbSchema, menuSchema } from "../lib/seo";
+import Scene3D from "../components/three/Scene3D.tsx";
+import { getCollection } from "astro:content";
+
+const services = await getCollection("services");
+services.sort((a, b) => a.data.order - b.data.order);
+
+const categoryConfig: Record<string, { label: string; icon: string; color: string; bg: string }> = {
+  nails: {
+    label: "Nail Services",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l2 6-8 12-8-12 2-6z"/><path d="M6 9h12"/></svg>`,
+    color: "text-rose-gold-deep",
+    bg: "bg-rose-gold-light",
+  },
+  massages: {
+    label: "Massage Therapy",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M20 21c0-4.418-3.582-8-8-8s-8 3.582-8 8"/></svg>`,
+    color: "text-sage-whisper",
+    bg: "bg-sage-light",
+  },
+  body: {
+    label: "Body Treatments",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
+    color: "text-gold-leaf",
+    bg: "bg-champagne",
+  },
+  face: {
+    label: "Facial & Eye Services",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z"/><circle cx="8.5" cy="9.5" r="1.5"/><circle cx="15.5" cy="9.5" r="1.5"/><path d="M15 15c-.5 1-1.5 1.5-3 1.5s-2.5-.5-3-1.5"/></svg>`,
+    color: "text-rose-gold",
+    bg: "bg-rose-gold-light",
+  },
+  piercing: {
+    label: "Piercing",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>`,
+    color: "text-champagne-gold",
+    bg: "bg-champagne",
+  },
+  packages: {
+    label: "Spa Packages",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c-4-3-8-6-8-11 0-3 4-8 8-8s8 5 8 8c0 5-4 8-8 11z"/><path d="M9 12l2 2 4-4"/></svg>`,
+    color: "text-gold-leaf-dark",
+    bg: "bg-champagne-light",
+  },
+};
+
+const categories = ["nails", "massages", "body", "face", "piercing", "packages"];
+---
+
+<BaseLayout
+  title="Services — Amani Nails & Spa | Manicure, Massage & Spa in Nairobi"
+  description="Explore our full menu of premium beauty and wellness services in Nairobi: manicure, pedicure, gel nails, acrylic nails, massage therapy, facials, body scrubs, waxing, piercing, and spa packages. Book your appointment today."
+  schemas={[
+    breadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "Services", url: "/services" },
+    ]),
+    menuSchema(services.map((s) => ({
+      name: s.data.title,
+      description: s.data.description ?? `${s.data.title} at Amani Nails & Spa in Nairobi, Kenya`,
+      price: s.data.price,
+      category: s.data.category,
+    }))),
+  ]}
+>
+  <!-- Hero -->
+  <section class="relative min-h-[70svh] flex items-center justify-center overflow-hidden bg-ivory-silk pt-20" data-animate>
+    <div class="absolute inset-0 z-0 opacity-30">
+      <Scene3D scene="silk" client:visible />
+    </div>
+    <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-ivory-silk to-transparent pointer-events-none z-[1]" />
+    <div class="container-luxury text-center relative z-10">
+      <p class="font-body text-xs uppercase tracking-[0.2em] text-taupe-warm mb-4">
+        Our Craft
+      </p>
+      <h1 class="font-display text-[clamp(2.5rem,7vw,4.5rem)] font-semibold text-espresso text-balance leading-[1.05]">
+        Exceptional Services,<br />
+        <span class="gradient-text-gold">Timeless Care</span>
+      </h1>
+      <p class="mt-4 font-body text-lg text-taupe max-w-xl mx-auto text-balance">
+        Every treatment is a ritual of renewal. Browse our complete menu of
+        premium beauty and wellness services below.
+      </p>
+    </div>
+  </section>
+
+  <!-- Category Navigation -->
+  <nav class="sticky top-20 z-40 bg-ivory-silk/90 backdrop-blur-md border-b border-champagne/50" data-animate>
+    <div class="container-luxury overflow-x-auto">
+      <div class="flex gap-1 py-3 min-w-max">
+        {categories.map((catId) => {
+          const cat = categoryConfig[catId];
+          return (
+            <a
+              href={`#cat-${catId}`}
+              class={`flex items-center gap-2 px-4 py-2.5 rounded-full font-body text-xs uppercase tracking-[0.1em] font-semibold transition-all duration-[var(--duration-fast)] ease-[var(--ease-luxury)] hover:bg-champagne ${cat.color}`}
+            >
+              <span class="h-4 w-4" set:html={cat.icon} />
+              {cat.label}
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </nav>
+
+  <!-- Service Sections -->
+  {categories.map((catId) => {
+    const catServices = services.filter((s) => s.data.category === catId);
+    if (catServices.length === 0) return null;
+    const cat = categoryConfig[catId];
+
+    return (
+      <section
+        id={`cat-${catId}`}
+        class:list={[
+          "section-padding scroll-mt-28",
+          catId === categories[0] ? "bg-ivory-silk" : "bg-champagne-light",
+        ]}
+        data-animate
+      >
+        <div class="container-luxury">
+          <!-- Category Header -->
+          <div class="flex items-center gap-4 mb-12">
+            <div class={`flex h-12 w-12 items-center justify-center rounded-full ${cat.bg} ${cat.color}`}>
+              <span class="h-6 w-6" set:html={cat.icon} />
+            </div>
+            <div>
+              <h2 class="font-display text-2xl md:text-3xl font-semibold text-espresso">
+                {cat.label}
+              </h2>
+              <p class="font-body text-sm text-taupe mt-0.5">
+                {catServices.length} {catServices.length === 1 ? "service" : "services"}
+              </p>
+            </div>
+          </div>
+
+          <!-- Service Cards Grid -->
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+            data-animate-stagger
+          >
+            {catServices.map((s) => {
+              const imageGradients = {
+                nails: "from-rose-gold-light via-champagne to-rose-gold/20",
+                massages: "from-sage-light via-champagne-light to-sage-whisper/20",
+                body: "from-champagne via-soft-beige to-champagne-gold/10",
+                face: "from-rose-gold-light via-champagne-light to-rose-gold/10",
+                piercing: "from-champagne via-warm-white to-champagne-gold/10",
+                packages: "from-champagne-light via-warm-white to-gold-leaf/10",
+              };
+
+              return (
+                <article class="group relative flex flex-col rounded-[var(--radius-xl)] bg-warm-white shadow-soft transition-all duration-[var(--duration-normal)] ease-[var(--ease-luxury)] hover:shadow-elevated hover:-translate-y-1 overflow-hidden">
+                  <!-- Image / Gradient Area -->
+                  <a
+                    href={`/services/${s.slug}`}
+                    class="relative aspect-[4/3] overflow-hidden"
+                  >
+                    <div class={`absolute inset-0 bg-gradient-to-br ${imageGradients[catId]}`}>
+                      {s.data.image ? (
+                        <Image
+                          src={s.data.image}
+                          alt={`${s.data.title} at Amani Nails & Spa — premium beauty and wellness services in Nairobi, Kenya`}
+                          class="h-full w-full object-cover transition-all duration-[var(--duration-slow)] ease-[var(--ease-luxury)] group-hover:scale-105"
+                        />
+                      ) : (
+                        <div class="flex h-full items-center justify-center">
+                          <span
+                            class="h-16 w-16 opacity-20"
+                            set:html={cat.icon}
+                          />
+                        </div>
+                      )}
+                    </div>
+                    <!-- Gradient overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-espresso/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-[var(--duration-normal)]" />
+                    <!-- Category badge -->
+                    <div class="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/80 backdrop-blur-sm font-body text-[10px] uppercase tracking-[0.1em] font-semibold text-espresso shadow-soft">
+                      <span class={`h-3 w-3 ${cat.color}`} set:html={cat.icon} />
+                      {cat.label}
+                    </div>
+                  </a>
+
+                  <!-- Content -->
+                  <div class="flex flex-col flex-1 p-5 lg:p-6">
+                    <h3 class="font-display text-lg font-semibold text-espresso">
+                      <a href={`/services/${s.slug}`} class="hover:text-gold-leaf transition-colors duration-[var(--duration-fast)]">
+                        {s.data.title}
+                      </a>
+                    </h3>
+
+                    {s.data.description && (
+                      <p class="mt-2 font-body text-sm text-taupe leading-relaxed line-clamp-2">
+                        {s.data.description}
+                      </p>
+                    )}
+
+                    <!-- Benefits -->
+                    {s.data.benefits && s.data.benefits.length > 0 && (
+                      <ul class="mt-3 space-y-1">
+                        {s.data.benefits.slice(0, 3).map((b) => (
+                          <li class="flex items-start gap-2 font-body text-xs text-taupe">
+                            <svg class="mt-0.5 h-3 w-3 shrink-0 text-gold-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                              <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            {b}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+
+                    <!-- Price & Duration -->
+                    <div class="mt-auto pt-4 flex items-center justify-between">
+                      <div class="flex items-center gap-3">
+                        <span class="font-display text-xl font-bold text-gold-leaf">
+                          KES {s.data.price.toLocaleString()}
+                        </span>
+                        <span class="flex items-center gap-1 font-body text-xs text-taupe">
+                          <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12 6 12 12 16 14" />
+                          </svg>
+                          {s.data.duration} min
+                        </span>
+                      </div>
+                    </div>
+
+                    <!-- Book Button -->
+                    <a
+                      href="/booking"
+                      class="mt-4 inline-flex items-center justify-center gap-2 w-full px-4 py-3 bg-champagne text-espresso font-body text-xs font-semibold tracking-[0.08em] uppercase rounded-full transition-all duration-[var(--duration-normal)] ease-[var(--ease-luxury)] hover:bg-gold-leaf hover:text-espresso group/btn"
+                    >
+                      Book Now
+                      <svg
+                        class="h-3.5 w-3.5 transition-transform duration-[var(--duration-fast)] group-hover/btn:translate-x-0.5"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                      >
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                        <polyline points="12 5 19 12 12 19" />
+                      </svg>
+                    </a>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    );
+  })}
+
+  <!-- Bottom CTA -->
+  <section class="section-padding bg-espresso text-center overflow-hidden" data-animate>
+    <div class="container-luxury relative z-10">
+      <h2 class="font-display text-[clamp(1.75rem,4vw,3rem)] font-semibold text-champagne text-balance">
+        Ready to Experience <span class="gradient-text-gold">Amani</span>?
+      </h2>
+      <p class="mt-4 font-body text-base text-champagne/70 max-w-xl mx-auto">
+        Book your appointment today and discover why Amani is Nairobi's most
+        coveted beauty and wellness destination.
+      </p>
+      <a
+        href="/booking"
+        class="mt-10 inline-flex items-center gap-2 px-10 py-5 bg-champagne-gold text-espresso font-body text-sm font-semibold tracking-[0.05em] uppercase rounded-full transition-all duration-[var(--duration-normal)] ease-[var(--ease-luxury)] shadow-soft hover:shadow-elevated hover:bg-gold-leaf active:scale-[0.98]"
+      >
+        Schedule Your Visit
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12" />
+          <polyline points="12 5 19 12 12 19" />
+        </svg>
+      </a>
+    </div>
+  </section>
+</BaseLayout>

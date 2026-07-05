@@ -1,0 +1,67 @@
+---
+const days = [
+  { name: "Monday", time: "8:00 AM – 8:00 PM" },
+  { name: "Tuesday", time: "8:00 AM – 8:00 PM" },
+  { name: "Wednesday", time: "8:00 AM – 8:00 PM" },
+  { name: "Thursday", time: "8:00 AM – 8:00 PM" },
+  { name: "Friday", time: "8:00 AM – 8:00 PM" },
+  { name: "Saturday", time: "8:00 AM – 8:00 PM" },
+  { name: "Sunday", time: "10:00 AM – 6:00 PM" },
+];
+---
+
+<section class="section-padding bg-champagne-light overflow-hidden" data-animate>
+  <div class="container-luxury">
+    <div class="text-center max-w-2xl mx-auto">
+      <p class="font-body text-xs uppercase tracking-[0.2em] text-taupe-warm mb-4">
+        Visit Us
+      </p>
+      <h2 class="font-display text-[clamp(1.75rem,4vw,3rem)] font-semibold text-espresso text-balance">
+        Our <span class="gradient-text-gold">Hours</span>
+      </h2>
+      <p class="mt-4 font-body text-base text-taupe mb-14">
+        We're open seven days a week to serve you. Walk-ins welcome, though
+        appointments are recommended.
+      </p>
+    </div>
+
+    <div class="max-w-2xl mx-auto" data-animate-stagger>
+      <div class="rounded-[var(--radius-xl)] bg-warm-white shadow-soft overflow-hidden">
+        {days.map((day) => (
+          <div
+            class="flex items-center justify-between px-6 md:px-8 py-4 border-b border-champagne-light last:border-b-0 transition-colors duration-[var(--duration-fast)]"
+            data-day-row={day.name}
+          >
+            <div class="flex items-center gap-3">
+              <span class="font-display text-base font-medium text-espresso">{day.name}</span>
+              <span
+                class="today-badge hidden px-2 py-0.5 rounded-full bg-gold-leaf/15 text-gold-leaf font-body text-[10px] uppercase tracking-[0.1em] font-semibold"
+              >
+                Today
+              </span>
+            </div>
+            <span class="font-body text-sm text-taupe">{day.time}</span>
+          </div>
+        ))}
+      </div>
+
+      <p class="mt-6 text-center font-body text-sm text-taupe-warm">
+        <span class="font-semibold text-espresso">Public holidays:</span> 10:00 AM – 4:00 PM
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const today = new Date().toLocaleDateString("en-US", { weekday: "long" });
+  const row = document.querySelector(`[data-day-row="${today}"]`);
+  if (row) {
+    row.classList.add("bg-gold-leaf/5");
+    const dayName = row.querySelector(".font-display");
+    if (dayName) dayName.classList.add("text-gold-leaf");
+    const timeEl = row.querySelector(".font-body.text-taupe");
+    if (timeEl) timeEl.classList.add("text-gold-leaf", "font-semibold");
+    const badge = row.querySelector(".today-badge");
+    if (badge) badge.classList.remove("hidden");
+  }
+</script>

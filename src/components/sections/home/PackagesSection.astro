@@ -1,0 +1,112 @@
+---
+import PricingCard from "../../ui/PricingCard.astro";
+
+const packages = [
+  {
+    title: "Serenity Escape",
+    price: "KES 8,000",
+    period: "per person / 90 min",
+    description:
+      "The perfect introduction to the Amani experience. A curated journey of relaxation.",
+    features: [
+      "Swedish massage (45 min)",
+      "Custom facial (30 min)",
+      "Classic manicure",
+      "Herbal tea service",
+      "Relaxation lounge access",
+    ],
+    popular: false,
+    variant: "light" as const,
+    ctaHref: "/booking?package=serenity",
+  },
+  {
+    title: "Bridal Radiance",
+    price: "KES 12,000",
+    period: "per person / 150 min",
+    description:
+      "Designed for your special day. Glow from within with our signature bridal ritual.",
+    features: [
+      "Hot stone massage (45 min)",
+      "Brightening facial (45 min)",
+      "Gel manicure",
+      "Gel pedicure",
+      "Sparkling wine & strawberries",
+      "Private suite access",
+    ],
+    popular: true,
+    variant: "dark" as const,
+    ctaHref: "/booking?package=bridal",
+  },
+  {
+    title: "Ultimate Indulgence",
+    price: "KES 15,000",
+    period: "per person / 180 min",
+    description:
+      "Our most comprehensive experience. Surrender to a full afternoon of profound renewal.",
+    features: [
+      "Deep tissue massage (60 min)",
+      "Full body scrub (30 min)",
+      "Deluxe facial (45 min)",
+      "Spa pedicure",
+      "Champagne & canapes",
+      "Private suite with shower",
+    ],
+    popular: false,
+    variant: "light" as const,
+    ctaHref: "/booking?package=ultimate",
+  },
+];
+---
+
+<section class="section-padding bg-ivory-silk overflow-hidden" data-animate>
+  <div class="container-luxury">
+    <div class="text-center max-w-2xl mx-auto">
+      <p class="font-body text-xs uppercase tracking-[0.2em] text-taupe-warm mb-4">
+        Spa Packages
+      </p>
+      <h2 class="font-display text-[clamp(1.75rem,4vw,3rem)] font-semibold text-espresso text-balance">
+        Immersive Journeys,<br />
+        <span class="gradient-text-gold">Curated for You</span>
+      </h2>
+      <p class="mt-4 font-body text-base text-taupe">
+        Combine our most beloved treatments into a single, seamless experience.
+        Each package is a handcrafted ritual of renewal.
+      </p>
+    </div>
+
+    <div
+      class="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-start"
+      data-animate-stagger
+    >
+      {packages.map((pkg) => (
+        <PricingCard
+          title={pkg.title}
+          price={pkg.price}
+          period={pkg.period}
+          description={pkg.description}
+          features={pkg.features}
+          popular={pkg.popular}
+          variant={pkg.variant}
+          cta="Book Experience"
+          ctaHref={pkg.ctaHref}
+        />
+      ))}
+    </div>
+
+    <div class="mt-12 text-center" data-animate>
+      <a
+        href="/pricing"
+        class="inline-flex items-center gap-2 font-body text-sm font-semibold tracking-[0.05em] uppercase text-gold-leaf hover:text-espresso transition-colors duration-[var(--duration-fast)] group"
+      >
+        View Full Pricing
+        <svg
+          class="h-4 w-4 transition-transform duration-[var(--duration-fast)] group-hover:translate-x-1"
+          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        >
+          <line x1="5" y1="12" x2="19" y2="12" />
+          <polyline points="12 5 19 12 12 19" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

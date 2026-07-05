@@ -1,0 +1,19 @@
+---
+import { AdminAuthProvider } from "../../components/admin/AdminAuth";
+import AdminDashboard from "../../components/admin/AdminDashboard";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard — Amani Admin</title>
+    <meta name="robots" content="noindex, nofollow" />
+  </head>
+  <body>
+    <AdminAuthProvider>
+      <AdminDashboard client:only="preact" />
+    </AdminAuthProvider>
+  </body>
+</html>

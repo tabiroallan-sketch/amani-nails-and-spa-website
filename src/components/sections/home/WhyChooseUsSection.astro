@@ -1,0 +1,79 @@
+---
+const reasons = [
+  {
+    icon: "expertise",
+    title: "Master Craftsmanship",
+    description:
+      "Every therapist and nail artist at Amani is rigorously trained, continuously educated, and deeply passionate about their craft. We set the standard for excellence in Nairobi.",
+  },
+  {
+    icon: "products",
+    title: "Premium Products",
+    description:
+      "We use only ethically sourced, professionally graded products from renowned international brands. Your skin and nails deserve nothing less than the finest formulations.",
+  },
+  {
+    icon: "ambiance",
+    title: "Serene Ambiance",
+    description:
+      "From the moment you step through our doors, every detail — the lighting, the aromatherapy, the curated playlist — is designed to transport you to a place of profound calm.",
+  },
+  {
+    icon: "hygiene",
+    title: "Impeccable Hygiene",
+    description:
+      "Sterilization isn't just a protocol at Amani — it's a promise. Every instrument is hospital-grade sterilized, and every station is meticulously sanitized between guests.",
+  },
+];
+
+const icons: Record<string, string> = {
+  expertise:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c-4-3-8-6-8-11 0-3 4-8 8-8s8 5 8 8c0 5-4 8-8 11z"/><path d="M9 12l2 2 4-4"/></svg>',
+  products:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>',
+  ambiance:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>',
+  hygiene:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+};
+---
+
+<section class="section-padding bg-warm-white overflow-hidden" data-animate>
+  <div class="container-luxury">
+    <div class="text-center max-w-2xl mx-auto">
+      <p class="font-body text-xs uppercase tracking-[0.2em] text-taupe-warm mb-4">
+        Why Amani
+      </p>
+      <h2 class="font-display text-[clamp(1.75rem,4vw,3rem)] font-semibold text-espresso text-balance">
+        Crafted for <span class="gradient-text-gold">Excellence</span>
+      </h2>
+      <p class="mt-4 font-body text-base text-taupe">
+        Every element of the Amani experience is intentional — from the products
+        we choose to the ambiance we cultivate.
+      </p>
+    </div>
+
+    <div
+      class="mt-14 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8"
+      data-animate-stagger
+    >
+      {reasons.map((r) => (
+        <div
+          class="group relative flex gap-5 p-6 lg:p-8 rounded-[var(--radius-lg)] bg-ivory-silk shadow-soft transition-all duration-[var(--duration-normal)] ease-[var(--ease-luxury)] hover:shadow-elevated hover:-translate-y-0.5"
+        >
+          <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-champagne text-gold-leaf transition-colors duration-[var(--duration-normal)] group-hover:bg-gold-leaf group-hover:text-ivory-silk">
+            <span class="h-6 w-6" set:html={icons[r.icon]} />
+          </div>
+          <div>
+            <h3 class="font-display text-lg font-semibold text-espresso">
+              {r.title}
+            </h3>
+            <p class="mt-2 font-body text-sm leading-relaxed text-taupe">
+              {r.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

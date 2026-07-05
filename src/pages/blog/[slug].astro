@@ -1,0 +1,48 @@
+---
+import BaseLayout from "../../components/layout/BaseLayout.astro";
+import { articleSchema, breadcrumbSchema } from "../../lib/seo";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  type="article"
+  publishedTime={post.data.date}
+  author={post.data.author}
+  image={post.data.image}
+  schemas={[
+    articleSchema(post.data.title, post.data.description, post.data.date, post.data.author, post.data.image),
+    breadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "Journal", url: "/blog" },
+      { name: post.data.title, url: `/blog/${post.slug}` },
+    ]),
+  ]}
+>
+  <article class="section-padding bg-ivory-silk pt-32">
+    <div class="container-luxury max-w-3xl">
+      <a href="/blog" class="font-body text-xs uppercase tracking-[0.2em] text-warm-taupe hover:text-espresso transition-colors">
+        ← Back to Journal
+      </a>
+      <p class="mt-8 font-body text-sm text-warm-taupe">{post.data.date}</p>
+      <h1 class="mt-2 font-display text-[clamp(2rem,4vw,3rem)] font-semibold text-espresso text-balance">
+        {post.data.title}
+      </h1>
+      <div class="mt-8 prose prose-espresso max-w-none">
+        <Content />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

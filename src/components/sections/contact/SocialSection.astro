@@ -1,0 +1,79 @@
+---
+interface SocialLink {
+  name: string;
+  href: string;
+  icon: string;
+}
+
+const socials: SocialLink[] = [
+  {
+    name: "Instagram",
+    href: "https://instagram.com/amanispanairobi",
+    icon: "instagram",
+  },
+  {
+    name: "Facebook",
+    href: "https://facebook.com/amanispanairobi",
+    icon: "facebook",
+  },
+  {
+    name: "TikTok",
+    href: "https://tiktok.com/@amanispanairobi",
+    icon: "tiktok",
+  },
+  {
+    name: "YouTube",
+    href: "https://youtube.com/@amanispanairobi",
+    icon: "youtube",
+  },
+];
+
+const icons: Record<string, string> = {
+  instagram:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>',
+  facebook:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>',
+  tiktok:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>',
+  youtube:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>',
+};
+---
+
+<section class="section-padding bg-espresso overflow-hidden" data-animate>
+  <div class="container-luxury">
+    <div class="text-center max-w-2xl mx-auto">
+      <p class="font-body text-xs uppercase tracking-[0.2em] text-ivory/60 mb-4">
+        Connect
+      </p>
+      <h2 class="font-display text-[clamp(1.75rem,4vw,3rem)] font-semibold text-ivory text-balance">
+        Follow Our <span class="gradient-text-gold">Journey</span>
+      </h2>
+      <p class="mt-4 font-body text-base text-ivory/70 mb-14">
+        Join our community and stay inspired with daily content, behind-the-scenes
+        moments, and exclusive offers.
+      </p>
+    </div>
+
+    <div
+      class="flex flex-wrap justify-center gap-8 md:gap-12"
+      data-animate-stagger
+    >
+      {socials.map((s) => (
+        <a
+          href={s.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group flex flex-col items-center gap-3"
+        >
+          <div class="flex h-16 w-16 items-center justify-center rounded-full border border-ivory/20 text-ivory/80 transition-all duration-[var(--duration-normal)] ease-[var(--ease-luxury)] group-hover:bg-gold-leaf group-hover:text-espresso group-hover:border-gold-leaf group-hover:shadow-elevated">
+            <span class="h-6 w-6" set:html={icons[s.icon]} />
+          </div>
+          <span class="font-body text-xs tracking-[0.1em] uppercase text-ivory/60 group-hover:text-gold-leaf transition-colors duration-[var(--duration-fast)]">
+            {s.name}
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

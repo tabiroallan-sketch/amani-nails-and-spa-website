@@ -1,0 +1,96 @@
+---
+export interface Props {
+  name: string;
+  label?: string;
+  type?: "text" | "email" | "tel" | "password" | "url" | "number" | "date";
+  placeholder?: string;
+  variant?: "outlined" | "filled" | "flushed";
+  size?: "sm" | "md" | "lg";
+  required?: boolean;
+  disabled?: boolean;
+  readonly?: boolean;
+  error?: string;
+  helperText?: string;
+  leadingIcon?: boolean;
+  trailingIcon?: boolean;
+  value?: string;
+}
+
+const {
+  name,
+  label,
+  type = "text",
+  placeholder,
+  variant = "outlined",
+  size = "md",
+  required = false,
+  disabled = false,
+  readonly = false,
+  error = "",
+  helperText = "",
+  leadingIcon = false,
+  trailingIcon = false,
+  value,
+} = Astro.props;
+
+const base =
+  "w-full font-body transition-all duration-[var(--duration-normal)] ease-[var(--ease-luxury)] placeholder:text-warm-grey/50 focus:outline-none disabled:opacity-40 disabled:cursor-not-allowed disabled:bg-champagne-light readonly:cursor-default";
+
+const variants: Record<string, string> = {
+  outlined:
+    "bg-warm-white border border-taupe-light/40 focus:border-gold-leaf focus:shadow-[0_0_0_3px_rgba(201,168,108,0.1)]",
+  filled:
+    "bg-champagne-light border border-transparent focus:bg-warm-white focus:border-gold-leaf focus:shadow-[0_0_0_3px_rgba(201,168,108,0.1)]",
+  flushed:
+    "bg-transparent border-b border-taupe-light/40 px-0 focus:border-gold-leaf rounded-none",
+};
+
+const sizes: Record<string, string> = {
+  sm: "px-3 py-2 text-sm rounded-[var(--radius-sm)]",
+  md: "px-4 py-3 text-base rounded-[var(--radius-md)]",
+  lg: "px-5 py-4 text-lg rounded-[var(--radius-md)]",
+};
+
+const hasError = error.length > 0;
+
+const inputClasses = `${base} ${variants[variant]} ${sizes[size]} ${hasError ? "border-rose-gold-deep focus:border-rose-gold-deep focus:shadow-[0_0_0_3px_rgba(201,138,142,0.15)]" : ""} ${leadingIcon ? "pl-10" : ""} ${trailingIcon ? "pr-10" : ""}`;
+const rootClasses = `group relative${disabled ? " opacity-60" : ""}`;
+---
+
+<div class={rootClasses}>
+  {label && (
+    <label for={name} class={`block font-body text-sm font-medium mb-2 ${hasError ? "text-rose-gold-deep" : "text-charcoal"}`}>
+      {label}
+      {required && <span class="ml-1 text-rose-gold-deep" aria-hidden="true">*</span>}
+    </label>
+  )}
+  <div class="relative">
+    {leadingIcon && (
+      <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-warm-grey group-focus-within:text-gold-leaf transition-colors duration-[var(--duration-fast)]">
+        <slot name="leading-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </slot>
+      </div>
+    )}
+    <input
+      id={name}
+      name={name}
+      type={type}
+      placeholder={placeholder}
+      required={required}
+      disabled={disabled}
+      readonly={readonly}
+      value={value}
+      class={inputClasses}
+      aria-invalid={hasError}
+      aria-describedby={hasError ? `${name}-error` : helperText ? `${name}-helper` : undefined}
+    />
+    {trailingIcon && (
+      <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3.5 text-warm-grey group-focus-within:text-gold-leaf transition-colors duration-[var(--duration-fast)]">
+        <slot name="trailing-icon" />
+      </div>
+    )}
+  </div>
+  {hasError && <p id={`${name}-error`} class="mt-1.5 text-sm text-rose-gold-deep" role="alert">{error}</p>}
+  {helperText && !hasError && <p id={`${name}-helper`} class="mt-1.5 text-sm text-taupe">{helperText}</p>}
+</div>

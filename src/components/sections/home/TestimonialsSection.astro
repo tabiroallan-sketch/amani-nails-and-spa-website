@@ -1,0 +1,63 @@
+---
+import Testimonial from "../../ui/Testimonial.astro";
+
+const testimonials = [
+  {
+    quote:
+      "The most exquisite spa experience I've had in Nairobi. From the moment I walked in, every detail was perfect. Esther's nail artistry is simply unmatched — my gel manicure lasted three weeks without a single chip.",
+    author: "Grace Mwangi",
+    role: "Regular Client",
+    rating: 5,
+    avatar: "/images/team/grace.webp",
+  },
+  {
+    quote:
+      "I booked the Ultimate Indulgence package for my birthday and it was absolutely transformative. The deep tissue massage released tension I'd been carrying for months. I left feeling like a completely new person.",
+    author: "James Ochieng",
+    role: "First-time Visitor",
+    rating: 5,
+    avatar: "/images/team/james.webp",
+  },
+  {
+    quote:
+      "Amani is my sanctuary. As a busy professional in Nairobi, carving out time for myself is rare — but the Serenity Escape package is worth every shilling. The facial left my skin radiant for weeks.",
+    author: "Faith Muthoni",
+    role: "Member since 2023",
+    rating: 5,
+    avatar: "/images/team/faith.webp",
+  },
+];
+---
+
+<section class="section-padding bg-champagne-light overflow-hidden" data-animate>
+  <div class="container-luxury">
+    <div class="text-center max-w-2xl mx-auto">
+      <p class="font-body text-xs uppercase tracking-[0.2em] text-taupe-warm mb-4">
+        Testimonials
+      </p>
+      <h2 class="font-display text-[clamp(1.75rem,4vw,3rem)] font-semibold text-espresso text-balance">
+        Voices of <span class="gradient-text-gold">Serenity</span>
+      </h2>
+      <p class="mt-4 font-body text-base text-taupe">
+        Don't take our word for it. Here's what our guests have to say about the
+        Amani experience.
+      </p>
+    </div>
+
+    <div
+      class="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8"
+      data-animate-stagger
+    >
+      {testimonials.map((t) => (
+        <Testimonial
+          quote={t.quote}
+          author={t.author}
+          role={t.role}
+          rating={t.rating}
+          avatar={t.avatar}
+          variant="card"
+        />
+      ))}
+    </div>
+  </div>
+</section>

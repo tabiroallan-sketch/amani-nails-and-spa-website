@@ -1,0 +1,44 @@
+---
+import BaseLayout from "../components/layout/BaseLayout.astro";
+import { faqSchema } from "../lib/seo";
+
+import HeroSection from "../components/sections/home/HeroSection.astro";
+import AboutSection from "../components/sections/home/AboutSection.astro";
+import FeaturedServicesSection from "../components/sections/home/FeaturedServicesSection.astro";
+import WhyChooseUsSection from "../components/sections/home/WhyChooseUsSection.astro";
+import GallerySection from "../components/sections/home/GallerySection.astro";
+import PackagesSection from "../components/sections/home/PackagesSection.astro";
+import TestimonialsSection from "../components/sections/home/TestimonialsSection.astro";
+import InstagramSection from "../components/sections/home/InstagramSection.astro";
+import FAQSection from "../components/sections/home/FAQSection.astro";
+import BookingSection from "../components/sections/home/BookingSection.astro";
+import LocationSection from "../components/sections/home/LocationSection.astro";
+
+const faq = faqSchema([
+  { question: "What services do you offer at Amani Nails & Spa in Nairobi?", answer: "We offer manicures, pedicures, gel polish, acrylic nails, nail art, Swedish massage, deep tissue massage, hot stone massage, facials, body scrubs, waxing, eyebrow shaping, eyelash extensions, ear and nose piercing, and curated spa packages at our Westlands location in Nairobi, Kenya." },
+  { question: "How do I book an appointment at your Nairobi spa?", answer: "Book online through our website, call +254 700 000 000, message us on WhatsApp, or visit our Westlands location in Nairobi. We offer same-day bookings subject to availability." },
+  { question: "What payment methods do you accept at Amani Nails & Spa?", answer: "We accept M-Pesa, credit/debit cards, and cash. Bank transfers are accepted for spa packages and gift certificates. All prices are in Kenyan Shillings (KES)." },
+  { question: "What is your cancellation policy?", answer: "We require 24 hours notice for cancellations. Late cancellations may incur a 50% fee. No-shows are charged the full amount. We value your time and ours equally." },
+  { question: "Where is Amani Nails & Spa located in Nairobi?", answer: "We are located in Westlands Business Park, Waiyaki Way, Nairobi, Kenya. We're easily accessible from all parts of Nairobi including Kilimani, Lavington, Karen, and the CBD." },
+  { question: "Do you offer couples massages in Nairobi?", answer: "Yes, we offer side-by-side treatments in our dual therapy room. Perfect for couples, friends, or family members looking to enjoy a spa experience together in Nairobi." },
+]);
+---
+
+<BaseLayout
+  title="Amani Nails & Spa — Best Nail Salon & Luxury Spa in Nairobi, Kenya"
+  description="Discover Nairobi's premier beauty and wellness destination. Award-winning manicure, pedicure, massage therapy, facials, and spa packages at Amani Nails & Spa in Westlands. Book your appointment today."
+  type="website"
+  schemas={[faq]}
+>
+  <HeroSection />
+  <FeaturedServicesSection />
+  <AboutSection />
+  <WhyChooseUsSection />
+  <GallerySection />
+  <PackagesSection />
+  <TestimonialsSection />
+  <InstagramSection />
+  <FAQSection />
+  <BookingSection />
+  <LocationSection />
+</BaseLayout>

@@ -1,0 +1,39 @@
+---
+export interface Props {
+  variant?: "solid" | "gradient" | "gold" | "rose";
+  label?: string;
+  orientation?: "horizontal" | "vertical";
+  spacing?: "sm" | "md" | "lg";
+}
+
+const { variant = "gradient", label, orientation = "horizontal", spacing = "md" } = Astro.props;
+
+const spacings: Record<string, string> = {
+  sm: "my-6",
+  md: "my-10",
+  lg: "my-16",
+};
+---
+
+{
+  orientation === "vertical" ? (
+    <div class="mx-auto h-full w-px" role="separator" aria-orientation="vertical">
+      <div class={`h-full w-full ${variant === "gold" ? "bg-gold-leaf" : variant === "rose" ? "bg-rose-gold" : "divider-luxury"}`} />
+    </div>
+  ) : label ? (
+    <div class={`flex items-center gap-4 ${spacings[spacing]}`} role="separator">
+      <span class="h-px flex-1 bg-gradient-to-r from-transparent via-gold-leaf/30 to-transparent" />
+      <span class="font-display text-sm italic text-taupe shrink-0">{label}</span>
+      <span class="h-px flex-1 bg-gradient-to-r from-transparent via-gold-leaf/30 to-transparent" />
+    </div>
+  ) : (
+    <div class={spacings[spacing]} role="separator">
+      <div class={`h-px w-full ${
+        variant === "solid" ? "bg-taupe-light/30" :
+        variant === "gold" ? "bg-gold-leaf/40" :
+        variant === "rose" ? "bg-rose-gold/40" :
+        "divider-luxury"
+      }`} />
+    </div>
+  )
+}

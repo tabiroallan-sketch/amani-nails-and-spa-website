@@ -1,0 +1,421 @@
+---
+import BaseLayout from "../components/layout/BaseLayout.astro";
+import Image from "../components/ui/Image.astro";
+import { breadcrumbSchema, reviewSchema } from "../lib/seo";
+import Scene3D from "../components/three/Scene3D.tsx";
+import StatsCounter from "../components/about/StatsCounter.tsx";
+import Timeline from "../components/about/Timeline.tsx";
+import { getCollection } from "astro:content";
+
+const team = await getCollection("team");
+team.sort((a, b) => a.data.order - b.data.order);
+
+const stats = [
+  { value: 8, suffix: "+", label: "Years of Excellence" },
+  { value: 18000, suffix: "+", label: "Happy Clients Served" },
+  { value: 18, suffix: "", label: "Signature Services" },
+  { value: 4, suffix: "", label: "Expert Specialists" },
+];
+
+const timelineEvents = [
+  { year: "2018", title: "The Vision is Born", description: "Amani Nails & Spa is founded in the heart of Nairobi with a single treatment room and a dream to redefine luxury wellness in Kenya.", side: "left" as const },
+  { year: "2019", title: "Expansion & Recognition", description: "We expand to four treatment rooms and welcome our first full team. Amani is named 'Best New Spa' by Kenya Spa Association.", side: "right" as const },
+  { year: "2020", title: "Resilience & Growth", description: "Despite global challenges, we invest in advanced sanitation protocols and launch contactless booking. Our client base doubles.", side: "left" as const },
+  { year: "2021", title: "National Accolades", description: "Amani wins 'Best Luxury Spa Experience' at the East African Beauty Awards. We introduce our signature hot stone massage.", side: "right" as const },
+  { year: "2022", title: "Team & Training", description: "Our team grows to four specialists, each with international training. We launch the Amani Apprentice Programme for aspiring therapists.", side: "left" as const },
+  { year: "2023", title: "Premium Services Launch", description: "Introduction of luxury spa packages, bridal treatments, and our exclusive aromatherapy line. Member of The Spa Association of Kenya.", side: "right" as const },
+  { year: "2024", title: "Digital Transformation", description: "We launch our online booking system, virtual consultations, and a loyalty programme. Featured in 'Best Salons in Nairobi' guide.", side: "left" as const },
+  { year: "2025", title: "Serving Thousands", description: "Amani celebrates 10,000+ happy clients. We partner with leading hotels for guest spa services across Nairobi.", side: "right" as const },
+];
+
+const awards = [
+  { title: "Best Luxury Spa Experience", year: "2021", org: "East African Beauty Awards", icon: "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" },
+  { title: "Best New Spa", year: "2019", org: "Kenya Spa Association", icon: "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" },
+  { title: "Top 10 Salons Nairobi", year: "2024", org: "Nairobi Lifestyle Magazine", icon: "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" },
+  { title: "Excellence in Service", year: "2023", org: "The Spa Association of Kenya", icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" },
+];
+
+const qualifications = [
+  { title: "CIDESCO International", desc: "World-renowned skincare and spa therapy certification" },
+  { title: "ITEC Massage Diploma", desc: "International Therapy Examination Council accredited" },
+  { title: "CND Shellac Certified", desc: "Authorised Creative Nail Design technicians" },
+  { title: "Thai Massage Certification", desc: "Traditional Thai massage — Chiang Mai, Thailand" },
+  { title: "Advanced Aromatherapy", desc: "Clinical aromatherapy — IFPA accredited" },
+  { title: "Spa Management Diploma", desc: "The Spa Association of Kenya certified" },
+];
+---
+
+<BaseLayout
+  title="About — Amani Nails & Spa | Nairobi's Luxury Beauty & Wellness Story"
+  description="Discover the story of Amani Nails & Spa — Nairobi's award-winning sanctuary for premium manicure, pedicure, massage therapy, facials, and spa packages since 2018. Meet our team of expert specialists."
+  schemas={[
+    breadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "About", url: "/about" },
+    ]),
+    reviewSchema(
+      "Sarah M.",
+      "The best spa experience in Nairobi! I've been coming to Amani for over two years for their gel manicures and deep tissue massages. The team is incredibly professional and the ambiance is pure serenity. Highly recommend the hot stone massage.",
+      5,
+      "2025-12-15",
+    ),
+  ]}
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-ivory-silk pt-32 pb-20">
+    <div class="absolute inset-0 bg-gradient-to-br from-champagne/20 via-ivory-silk to-transparent pointer-events-none" />
+    <div class="container-luxury relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div>
+          <p class="font-accent text-xs uppercase tracking-[0.2em] text-warm-taupe mb-4" data-animate>
+            Since 2018
+          </p>
+          <h1 class="font-display text-[clamp(2rem,5vw,3.5rem)] font-semibold text-espresso text-balance leading-[1.1]" data-animate data-delay="100">
+            Born in <span class="gradient-text-gold">Nairobi</span>,<br />Rooted in Wellness
+          </h1>
+          <p class="mt-6 font-body text-base text-warm-taupe leading-relaxed max-w-lg" data-animate data-delay="200">
+            Amani was born from a simple belief: that everyone deserves a moment of peace. 
+            Our founders saw the need for a space where world-class beauty services meet authentic Kenyan warmth.
+          </p>
+          <p class="mt-4 font-body text-base text-warm-taupe leading-relaxed max-w-lg" data-animate data-delay="250">
+            Every therapist, nail artist, and aesthetician at Amani is rigorously trained and deeply passionate. 
+            We use only premium, ethically sourced products — because your skin deserves nothing less.
+          </p>
+        </div>
+        <div class="aspect-[4/3] rounded-[var(--radius-2xl)] overflow-hidden shadow-luxury" data-animate data-delay="100">
+          <Scene3D scene="marble" client:visible />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission & Vision -->
+  <section class="section-padding bg-champagne/50">
+    <div class="container-luxury">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        <div class="p-8 md:p-10 rounded-[var(--radius-2xl)] bg-warm-white border border-champagne shadow-soft" data-animate>
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold-leaf-light to-champagne flex items-center justify-center mb-5">
+            <svg class="w-5 h-5 text-espresso" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 22c-4-3-8-6-8-11 0-4 3.5-7.5 8-7.5S20 7 20 11c0 5-4 8-8 11z"/>
+              <path d="M12 13a2 2 0 100-4 2 2 0 000 4z"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-xl font-semibold text-espresso">Our Mission</h3>
+          <p class="mt-3 font-body text-sm text-warm-taupe leading-relaxed">
+            To provide an oasis of tranquillity in the heart of Nairobi, where every guest receives 
+            world-class beauty and wellness services delivered with authentic Kenyan hospitality, 
+            using the finest ethically sourced products in an environment of serene luxury.
+          </p>
+        </div>
+
+        <div class="p-8 md:p-10 rounded-[var(--radius-2xl)] bg-espresso shadow-soft" data-animate data-delay="100">
+          <div class="w-12 h-12 rounded-full bg-gold-leaf/20 flex items-center justify-center mb-5">
+            <svg class="w-5 h-5 text-gold-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M2 12h20M12 2v20"/>
+              <circle cx="12" cy="12" r="10"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-xl font-semibold text-ivory">Our Vision</h3>
+          <p class="mt-3 font-body text-sm text-ivory/70 leading-relaxed">
+            To redefine African luxury wellness by becoming East Africa's most celebrated spa destination — 
+            where craftsmanship, tranquillity, and innovation converge to create transformative experiences 
+            that linger long after each visit.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="section-padding bg-ivory-silk">
+    <div class="container-luxury">
+      <p class="font-accent text-xs uppercase tracking-[0.2em] text-warm-taupe mb-4 text-center">
+        By the Numbers
+      </p>
+      <h2 class="font-display text-[clamp(1.75rem,4vw,2.75rem)] font-semibold text-espresso text-center text-balance mb-12">
+        Our Journey in Numbers
+      </h2>
+      <StatsCounter client:load stats={stats} />
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="section-padding bg-champagne/30">
+    <div class="container-luxury">
+      <p class="font-accent text-xs uppercase tracking-[0.2em] text-gold-leaf-dark mb-4 text-center">
+        Our Story
+      </p>
+      <h2 class="font-display text-[clamp(1.75rem,4vw,2.75rem)] font-semibold text-espresso text-center text-balance mb-4">
+        The Amani Timeline
+      </h2>
+      <p class="font-body text-sm text-warm-taupe text-center max-w-lg mx-auto mb-14">
+        From a single room to Nairobi's premier wellness sanctuary — our journey.
+      </p>
+      <Timeline client:load events={timelineEvents} />
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="section-padding bg-ivory-silk">
+    <div class="container-luxury">
+      <p class="font-accent text-xs uppercase tracking-[0.2em] text-warm-taupe mb-4 text-center">
+        Our Team
+      </p>
+      <h2 class="font-display text-[clamp(1.75rem,4vw,3rem)] font-semibold text-espresso text-center text-balance">
+        The Hands Behind Your Serenity
+      </h2>
+      <p class="mt-3 font-body text-sm text-warm-taupe text-center max-w-lg mx-auto mb-14">
+        Meet the dedicated professionals who make every Amani experience exceptional.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto" data-animate-stagger>
+        {team.map((member) => {
+          const initials = member.data.name.split(" ").map((n) => n[0]).join("");
+          const gradientMap = {
+            esther: "from-rose-gold-light via-champagne to-rose-gold/30",
+            grace: "from-sage-light via-champagne-light to-sage-whisper/30",
+            faith: "from-champagne via-soft-beige to-dusty-pink/30",
+            james: "from-gold-leaf-light via-champagne to-gold-leaf/20",
+          };
+          const gradient = gradientMap[member.slug] || "from-champagne via-soft-beige to-champagne/20";
+          return (
+            <div class="flex gap-5 p-5 rounded-[var(--radius-xl)] bg-warm-white border border-champagne shadow-soft hover:shadow-elevated transition-shadow duration-[var(--duration-normal)]">
+              <div class="w-20 h-20 rounded-full overflow-hidden shrink-0">
+                {member.data.image && (
+                  <img src={member.data.image} alt={member.data.name} class="w-full h-full object-cover" loading="lazy" />
+                )}
+              </div>
+              <div class="min-w-0">
+                <h3 class="font-display text-lg font-semibold text-espresso">{member.data.name}</h3>
+                <p class="font-body text-sm text-gold-leaf-dark">{member.data.title}</p>
+                {member.data.bio && (
+                  <p class="mt-2 font-body text-sm text-warm-taupe leading-relaxed">{member.data.bio}</p>
+                )}
+                {member.data.specialties && member.data.specialties.length > 0 && (
+                  <div class="flex flex-wrap gap-1.5 mt-3">
+                    {member.data.specialties.map((s) => (
+                      <span class="px-2.5 py-0.5 rounded-full bg-champagne/50 border border-champagne font-accent text-[10px] uppercase tracking-[0.05em] text-warm-taupe">
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- Qualifications -->
+  <section class="section-padding bg-champagne/40">
+    <div class="container-luxury">
+      <p class="font-accent text-xs uppercase tracking-[0.2em] text-gold-leaf-dark mb-4 text-center">
+        Certifications
+      </p>
+      <h2 class="font-display text-[clamp(1.75rem,4vw,2.75rem)] font-semibold text-espresso text-center text-balance mb-4">
+        Our Qualifications
+      </h2>
+      <p class="font-body text-sm text-warm-taupe text-center max-w-lg mx-auto mb-12">
+        Every member of our team holds internationally recognised certifications. We invest continuously in advanced training.
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" data-animate-stagger>
+        {qualifications.map((q) => (
+          <div class="flex items-start gap-4 p-5 rounded-[var(--radius-lg)] bg-warm-white border border-champagne shadow-soft">
+            <div class="w-10 h-10 rounded-full bg-gold-leaf/10 flex items-center justify-center shrink-0 mt-0.5">
+              <svg class="w-4 h-4 text-gold-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-display text-sm font-semibold text-espresso">{q.title}</h3>
+              <p class="font-body text-xs text-warm-taupe mt-1">{q.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Awards -->
+  <section class="section-padding bg-ivory-silk">
+    <div class="container-luxury">
+      <p class="font-accent text-xs uppercase tracking-[0.2em] text-warm-taupe mb-4 text-center">
+        Recognition
+      </p>
+      <h2 class="font-display text-[clamp(1.75rem,4vw,2.75rem)] font-semibold text-espresso text-center text-balance mb-4">
+        Awards & Accolades
+      </h2>
+      <p class="font-body text-sm text-warm-taupe text-center max-w-lg mx-auto mb-12">
+        We're honoured to be recognised by Kenya's leading beauty and wellness institutions.
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto" data-animate-stagger>
+        {awards.map((award) => (
+          <div class="flex items-start gap-4 p-5 rounded-[var(--radius-lg)] bg-warm-white border border-champagne shadow-soft hover:shadow-elevated transition-shadow duration-[var(--duration-normal)]">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold-leaf-light to-champagne flex items-center justify-center shrink-0">
+              <svg class="w-4 h-4 text-espresso" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d={award.icon} />
+              </svg>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="font-display text-sm font-semibold text-espresso">{award.title}</h3>
+                <span class="px-2 py-0.5 rounded-full bg-espresso font-accent text-[10px] font-bold text-gold-leaf">{award.year}</span>
+              </div>
+              <p class="font-body text-xs text-warm-taupe mt-1">{award.org}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Interior -->
+  <section class="section-padding relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-espresso via-espresso-light to-charcoal-deep pointer-events-none" />
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(201,168,108,0.08),transparent_50%),radial-gradient(ellipse_at_bottom_right,_rgba(232,180,184,0.04),transparent_50%)] pointer-events-none" />
+    <div class="container-luxury relative z-10">
+      <p class="font-accent text-xs uppercase tracking-[0.2em] text-gold-leaf-light mb-4 text-center">
+        Our Space
+      </p>
+      <h2 class="font-display text-[clamp(1.75rem,4vw,2.75rem)] font-semibold text-ivory text-center text-balance">
+        Step Inside Our Sanctuary
+      </h2>
+      <p class="mt-3 font-body text-sm text-ivory/60 text-center max-w-lg mx-auto mb-12">
+        Every corner of Amani is designed for tranquillity — from the ambient lighting to the curated art and bespoke furniture.
+      </p>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 max-w-4xl mx-auto">
+        {[
+          { name: "Treatment Suite", img: "/images/gallery/treatment-room.webp", alt: "Private treatment suite with heated therapy bed and ambient lighting at Amani Nails & Spa in Nairobi" },
+          { name: "Relaxation Lounge", img: "/images/gallery/salon-lounge.webp", alt: "Elegant relaxation lounge with champagne bar and curated art at Amani Nails & Spa in Westlands, Nairobi" },
+          { name: "Nail Atelier", img: "/images/gallery/interior-1.webp", alt: "Luxurious nail atelier with modern manicure stations and designer lighting at Amani Nails & Spa" },
+          { name: "Tea & Wellness Bar", img: "/images/gallery/spa-suite.webp", alt: "Signature spa suite with ambient candlelight and calming neutral tones at Amani Nails & Spa" },
+        ].map((space, i) => (
+          <div class={`rounded-[var(--radius-xl)] overflow-hidden ${i === 0 ? "row-span-2" : ""}`} data-animate data-delay={i * 100}>
+            <div class={`w-full relative group cursor-pointer overflow-hidden ${i === 0 ? "aspect-[3/4]" : "aspect-[4/3]"}`}>
+              <Image src={space.img} alt={space.alt} class="absolute inset-0 w-full h-full object-cover transition-transform duration-[var(--duration-slow)] group-hover:scale-110" />
+              <div class="absolute inset-0 bg-espresso/0 group-hover:bg-espresso/20 transition-colors duration-[var(--duration-normal)]" />
+              <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-espresso/60 to-transparent">
+                <p class="font-display text-sm font-semibold text-ivory">{space.name}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section class="section-padding bg-ivory-silk">
+    <div class="container-luxury">
+      <div class="max-w-4xl mx-auto">
+        <p class="font-accent text-xs uppercase tracking-[0.2em] text-warm-taupe mb-4 text-center">
+          The Amani Experience
+        </p>
+        <h2 class="font-display text-[clamp(1.75rem,4vw,2.75rem)] font-semibold text-espresso text-center text-balance">
+          What to Expect When You Visit
+        </h2>
+        <p class="mt-3 font-body text-sm text-warm-taupe text-center max-w-lg mx-auto mb-12">
+          From the moment you step through our doors, every detail is designed for your comfort.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6" data-animate-stagger>
+          {[
+            {
+              step: "01",
+              title: "Welcome & Consultation",
+              desc: "You're greeted with a warm herbal tea and a brief consultation to understand your needs, preferences, and any sensitivities.",
+              gradient: "from-gold-leaf-light via-champagne to-gold-leaf/15",
+            },
+            {
+              step: "02",
+              title: "Your Treatment",
+              desc: "Relax in our serene treatment rooms as our expert therapists deliver your personalised service with premium products and meticulous care.",
+              gradient: "from-sage-whisper via-champagne-light to-sage-whisper/20",
+            },
+            {
+              step: "03",
+              title: "Post-Care & Farewell",
+              desc: "Enjoy a moment of quiet in our relaxation lounge with post-treatment recommendations, then depart feeling renewed and radiant.",
+              gradient: "from-rose-gold-light via-champagne to-rose-gold/15",
+            },
+          ].map((item) => (
+            <div class="p-6 rounded-[var(--radius-xl)] bg-warm-white border border-champagne shadow-soft hover:shadow-elevated transition-shadow duration-[var(--duration-normal)]">
+              <div class={`w-12 h-12 rounded-full bg-gradient-to-br ${item.gradient} flex items-center justify-center mb-4`}>
+                <span class="font-accent text-sm font-bold text-espresso">{item.step}</span>
+              </div>
+              <h3 class="font-display text-lg font-semibold text-espresso">{item.title}</h3>
+              <p class="mt-2 font-body text-sm text-warm-taupe leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Bar -->
+  <section class="py-12 bg-champagne/30">
+    <div class="container-luxury">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6" data-animate-stagger>
+        {[
+          { label: "Craftsmanship", icon: "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" },
+          { label: "Tranquillity", icon: "M12 22c-4-3-8-6-8-11 0-4 3.5-7.5 8-7.5S20 7 20 11c0 5-4 8-8 11z" },
+          { label: "African Luxury", icon: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" },
+          { label: "Wellness", icon: "M17 9a5 5 0 0 0-10 0c0 3 2.5 5.5 5 7 2.5-1.5 5-4 5-7z" },
+        ].map((v) => (
+          <div class="text-center p-6">
+            <div class="w-12 h-12 rounded-full bg-gold-leaf/10 mx-auto flex items-center justify-center">
+              <svg class="w-5 h-5 text-gold-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d={v.icon} />
+              </svg>
+            </div>
+            <p class="mt-3 font-display text-sm font-semibold text-espresso">{v.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-padding relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-espresso via-espresso-light to-charcoal-deep pointer-events-none" />
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(201,168,108,0.06),transparent_60%)] pointer-events-none" />
+    <div class="container-luxury relative z-10 text-center">
+      <h2 class="font-display text-[clamp(1.75rem,4vw,2.75rem)] font-semibold text-ivory text-balance" data-animate>
+        Experience the Amani Difference
+      </h2>
+      <p class="mt-4 font-body text-base text-ivory/60 max-w-lg mx-auto" data-animate data-delay="100">
+        Book your first appointment and discover why Nairobi trusts Amani for premium beauty and wellness.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4" data-animate data-delay="200">
+        <a
+          href="/booking"
+          class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-gold-leaf text-espresso font-accent text-sm uppercase tracking-[0.1em] font-semibold transition-all duration-[var(--duration-normal)] hover:bg-champagne-gold hover:shadow-glow-gold"
+        >
+          Book an Appointment
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </a>
+        <a
+          href="/services"
+          class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-ivory/20 text-ivory font-accent text-sm uppercase tracking-[0.1em] font-semibold transition-all duration-[var(--duration-normal)] hover:bg-ivory/10"
+        >
+          View Services
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style is:global>
+  .about-values-icon {
+    width: 20px;
+    height: 20px;
+  }
+</style>

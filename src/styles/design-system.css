@@ -1,0 +1,292 @@
+/* ── Luxury Design System Utilities ── */
+
+/* ── Typography Utilities ── */
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-accent {
+  font-family: var(--font-accent);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.tracking-luxury {
+  letter-spacing: 0.15em;
+}
+
+.tracking-wide-luxury {
+  letter-spacing: 0.08em;
+}
+
+.leading-display {
+  line-height: 1.1;
+}
+
+.leading-relaxed-luxury {
+  line-height: 1.8;
+}
+
+.figure-luxury {
+  font-feature-settings: "liga" 1, "kern" 1;
+}
+
+/* ── Grid System ── */
+
+.grid-luxury {
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (width >= 640px) {
+  .grid-luxury {
+    gap: var(--space-8);
+  }
+}
+
+.grid-cols-12 {
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.grid-cols-auto-fit {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+}
+
+.grid-cols-auto-fill {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+}
+
+/* ── Flex Utilities ── */
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ── Decorative Elements ── */
+
+.gradient-gold {
+  background: linear-gradient(135deg, var(--color-gold-leaf), var(--color-champagne-gold));
+}
+
+.gradient-rose {
+  background: linear-gradient(135deg, var(--color-rose-gold), var(--color-rose-gold-deep));
+}
+
+.gradient-warm {
+  background: linear-gradient(135deg, var(--color-champagne), var(--color-soft-beige));
+}
+
+.gradient-dark {
+  background: linear-gradient(135deg, var(--color-espresso), var(--color-charcoal-deep));
+}
+
+.gradient-text-gold {
+  background: linear-gradient(135deg, var(--color-gold-leaf), var(--color-champagne-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-warm {
+  background: linear-gradient(135deg, var(--color-espresso), var(--color-taupe-warm));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Animation Keyframes ── */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes border-dance {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ── Animation Utility Classes ── */
+
+.animate-fade-up {
+  animation: fade-up var(--duration-slow) var(--ease-out-expo) forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in var(--duration-normal) var(--ease-luxury) forwards;
+}
+
+.animate-scale-in {
+  animation: scale-in var(--duration-slow) var(--ease-out-expo) forwards;
+}
+
+.animate-float {
+  animation: float 6s var(--ease-in-out-soft) infinite;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 3s var(--ease-in-out-soft) infinite;
+}
+
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-700 { animation-delay: 700ms; }
+.delay-1000 { animation-delay: 1000ms; }
+
+/* ── Border Utilities ── */
+
+.border-luxury {
+  border: 1px solid rgba(201, 168, 108, 0.2);
+}
+
+.border-luxury-light {
+  border: 1px solid rgba(201, 168, 108, 0.1);
+}
+
+.border-luxury-gold {
+  border: 1px solid var(--color-gold-leaf);
+}
+
+/* ── Divider Utility ── */
+
+.divider-luxury {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-gold-leaf) 20%,
+    var(--color-gold-leaf) 80%,
+    transparent
+  );
+}
+
+/* ── Aspect Ratio ── */
+
+.aspect-luxury {
+  aspect-ratio: 4 / 3;
+}
+
+.aspect-portrait {
+  aspect-ratio: 3 / 4;
+}
+
+/* ── Scroll Utilities ── */
+
+.scroll-mt-luxury {
+  scroll-margin-top: 6rem;
+}
+
+/* ── Truncation ── */
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── FAQ Accordion ── */
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+details summary::-moz-list-bullet {
+  list-style-type: none;
+}
+
+details > summary {
+  list-style: none;
+}
+
+details > div {
+  overflow: hidden;
+}
+
+details[open] > div {
+  animation: fade-up 0.35s var(--ease-out-expo) forwards;
+}
+
+/* ── Gallery Overlay ── */
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(44, 24, 16, 0.6) 0%,
+    transparent 50%
+  );
+  opacity: 0;
+  transition: opacity var(--duration-normal) var(--ease-luxury);
+}
+
+.group:hover .gallery-overlay {
+  opacity: 1;
+}
+
+/* ── Selection ── */
+
+::selection {
+  background-color: var(--color-gold-leaf);
+  color: var(--color-espresso);
+}

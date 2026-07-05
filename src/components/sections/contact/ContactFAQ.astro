@@ -1,0 +1,74 @@
+---
+const faqs = [
+  {
+    q: "How quickly do you respond to inquiries?",
+    a: "We respond within 2 hours during business hours (Mon–Sat: 8 AM – 8 PM, Sun: 10 AM – 6 PM). For messages sent outside these hours, we'll get back to you by the next business period. Maximum response time is 24 hours.",
+  },
+  {
+    q: "Can I book a group appointment?",
+    a: "Absolutely! We welcome groups of 4 or more for a shared spa experience. Whether it's a bridal party, birthday celebration, or corporate outing, contact us via WhatsApp or phone and we'll coordinate a seamless experience for your group.",
+  },
+  {
+    q: "Do you offer virtual consultations?",
+    a: "Yes, we offer virtual consultations via WhatsApp video call. This is perfect for discussing service options, nail art designs, skincare concerns, or spa package recommendations before you visit. Simply book through our contact form and we'll schedule a time.",
+  },
+  {
+    q: "Is there parking available?",
+    a: "Yes, complimentary parking is available at Westgate Mall, just a 2-minute walk from our entrance. We validate your parking ticket at reception — simply present it when checking in for your appointment.",
+  },
+  {
+    q: "What languages do your staff speak?",
+    a: "Our team is multilingual. We primarily communicate in English and Swahili, with several team members also conversational in basic French. We strive to make every guest feel welcome and understood.",
+  },
+  {
+    q: "Can I purchase a gift card without visiting?",
+    a: "Yes! Digital gift cards are available for purchase through our website. You can choose any amount and the e-gift card will be delivered via email instantly, making it a perfect last-minute gift for any occasion.",
+  },
+];
+---
+
+<section class="section-padding bg-ivory-silk overflow-hidden" data-animate>
+  <div class="container-luxury">
+    <div class="text-center max-w-2xl mx-auto">
+      <p class="font-body text-xs uppercase tracking-[0.2em] text-taupe-warm mb-4">
+        FAQs
+      </p>
+      <h2 class="font-display text-[clamp(1.75rem,4vw,3rem)] font-semibold text-espresso text-balance">
+        Got <span class="gradient-text-gold">Questions?</span>
+      </h2>
+      <p class="mt-4 font-body text-base text-taupe mb-14">
+        Find answers to commonly asked questions about visiting us. Still unsure?
+        <a href="#contact-form" class="text-gold-leaf underline decoration-gold-leaf/30 hover:decoration-gold-leaf transition-all">Send us a message</a>.
+      </p>
+    </div>
+
+    <div class="max-w-3xl mx-auto space-y-3" data-animate-stagger>
+      {faqs.map((faq) => (
+        <details class="group rounded-[var(--radius-md)] bg-warm-white transition-all duration-[var(--duration-normal)] ease-[var(--ease-luxury)] open:shadow-soft hover:shadow-soft">
+          <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none select-none">
+            <span class="font-display text-base font-medium text-espresso pr-4">
+              {faq.q}
+            </span>
+            <svg
+              class="h-4 w-4 shrink-0 text-gold-leaf transition-transform duration-[var(--duration-normal)] ease-[var(--ease-luxury)] group-open:rotate-45"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+          </summary>
+          <div class="px-6 pb-5 pt-0">
+            <p class="font-body text-sm leading-relaxed text-taupe">
+              {faq.a}
+            </p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

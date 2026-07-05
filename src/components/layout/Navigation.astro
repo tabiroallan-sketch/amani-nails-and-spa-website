@@ -1,0 +1,29 @@
+---
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/services", label: "Services" },
+  { href: "/gallery", label: "Gallery" },
+  { href: "/about", label: "About" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/contact", label: "Contact" },
+];
+---
+
+<nav class="hidden lg:flex items-center gap-8" aria-label="Main navigation">
+  {
+    links.map((link) => (
+      <a
+        href={link.href}
+        class="font-body text-sm font-medium tracking-[0.05em] uppercase text-warm-taupe hover:text-gold-leaf transition-colors duration-[var(--duration-fast)] ease-[var(--ease-luxury)]"
+      >
+        {link.label}
+      </a>
+    ))
+  }
+  <a
+    href="/booking"
+    class="ml-4 inline-flex items-center px-6 py-3 bg-gold-leaf text-espresso font-body text-sm font-semibold tracking-[0.05em] uppercase rounded-full hover:bg-espresso hover:text-ivory-silk transition-all duration-[var(--duration-normal)] ease-[var(--ease-luxury)]"
+  >
+    Book Now
+  </a>
+</nav>

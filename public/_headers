@@ -1,0 +1,31 @@
+# Cloudflare Pages headers
+# https://developers.cloudflare.com/pages/configuration/headers/
+
+# Default security headers for all pages
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  X-XSS-Protection: 0
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+
+# Cache static assets aggressively
+*.js
+  Cache-Control: public, max-age=31536000, immutable
+*.css
+  Cache-Control: public, max-age=31536000, immutable
+*.webp
+  Cache-Control: public, max-age=31536000, immutable
+*.png
+  Cache-Control: public, max-age=31536000, immutable
+*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+*.svg
+  Cache-Control: public, max-age=31536000, immutable
+*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML pages: short cache + revalidate
+*.html
+  Cache-Control: public, max-age=0, must-revalidate

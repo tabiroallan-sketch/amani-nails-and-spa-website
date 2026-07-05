@@ -1,0 +1,113 @@
+---
+import BaseLayout from "../../components/layout/BaseLayout.astro";
+import Image from "../../components/ui/Image.astro";
+import { serviceSchema, breadcrumbSchema } from "../../lib/seo";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const services = await getCollection("services");
+  return services.map((service) => ({
+    params: { slug: service.slug },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+const { Content } = await service.render();
+
+const categories: Record<string, string> = {
+  nails: "Nail Services",
+  massages: "Massage Therapy",
+  body: "Body Treatments",
+  face: "Facial & Eye Services",
+  piercing: "Piercing",
+  packages: "Spa Packages",
+};
+const categoryLabel = categories[service.data.category as keyof typeof categories] ?? service.data.category;
+
+const categoryDescriptions: Record<string, string> = {
+  nails: "manicure, pedicure, gel nails, and acrylic nails in Nairobi, Kenya",
+  massages: "Swedish massage, deep tissue massage, and hot stone massage in Nairobi, Kenya",
+  body: "body scrubs and waxing services in Nairobi, Kenya",
+  face: "facials, eyebrow shaping, and eyelash extensions in Nairobi, Kenya",
+  piercing: "ear piercing and nose piercing services in Nairobi, Kenya",
+  packages: "luxury spa packages and wellness experiences in Nairobi, Kenya",
+};
+const categoryDesc = categoryDescriptions[service.data.category as keyof typeof categories] ?? `in Nairobi, Kenya`;
+---
+
+<BaseLayout
+  title={`${service.data.title} in Nairobi — Amani Nails & Spa`}
+  description={service.data.description ?? `Premium ${service.data.title.toLowerCase()} at Amani Nails & Spa in Westlands, Nairobi. ${categoryDesc}. Book your appointment today for KES ${service.data.price.toLocaleString()}.`}
+  type="website"
+  image={service.data.image}
+  schemas={[
+    serviceSchema(
+      service.data.title,
+      service.data.description ?? `${service.data.title} at Amani Nails & Spa in Nairobi, Kenya`,
+      service.data.price,
+      service.data.category,
+      service.data.image,
+      service.data.duration,
+    ),
+    breadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "Services", url: "/services" },
+      { name: service.data.title, url: `/services/${service.slug}` },
+    ]),
+  ]}
+>
+  <section class="section-padding bg-ivory-silk pt-32">
+    <div class="container-luxury">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <a href="/services" class="font-body text-xs uppercase tracking-[0.2em] text-warm-taupe hover:text-espresso transition-colors">
+            ← All Services
+          </a>
+          <p class="mt-6 font-body text-xs uppercase tracking-[0.15em] text-warm-taupe">
+            {categoryLabel}
+          </p>
+          <h1 class="mt-2 font-display text-[clamp(2rem,5vw,3.5rem)] font-semibold text-espresso text-balance">
+            {service.data.title}
+          </h1>
+          {service.data.description && (
+            <p class="mt-4 font-body text-base text-warm-taupe leading-relaxed">
+              {service.data.description}
+            </p>
+          )}
+          <div class="mt-8 flex items-center gap-6">
+            <p class="font-display text-3xl font-semibold text-gold-leaf">
+              KES {service.data.price.toLocaleString()}
+            </p>
+            <p class="font-body text-sm text-warm-taupe">
+              {service.data.duration} minutes
+            </p>
+          </div>
+          <a
+            href="/booking"
+            class="mt-8 inline-flex items-center px-8 py-4 bg-gold-leaf text-ivory-silk font-body text-sm font-semibold tracking-[0.05em] uppercase rounded-full hover:bg-espresso transition-all duration-[var(--duration-normal)] ease-[var(--ease-luxury)]"
+          >
+            Book This Service
+          </a>
+        </div>
+        <div class="aspect-[4/3] rounded-[var(--radius-blob)] bg-champagne overflow-hidden flex items-center justify-center">
+          {service.data.image ? (
+            <Image
+              src={service.data.image}
+              alt={`${service.data.title} at Amani Nails & Spa in Westlands, Nairobi — premium beauty and wellness services`}
+              class="w-full h-full object-cover"
+            />
+          ) : (
+            <span class="font-body text-sm text-warm-taupe">Image coming soon</span>
+          )}
+        </div>
+      </div>
+
+      <div class="mt-20 max-w-3xl">
+        <div class="prose prose-espresso max-w-none">
+          <Content />
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

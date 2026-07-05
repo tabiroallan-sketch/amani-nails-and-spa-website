@@ -1,0 +1,22 @@
+{
+  "name": "amani-spa-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "migrate:local": "wrangler d1 migrations apply amani-spa --local",
+    "migrate:prod": "wrangler d1 migrations apply amani-spa --remote",
+    "db:seed": "wrangler --experimental-json-config exec --command 'import { migrate } from \"./src/db/migrate\"; await migrate(process.env.DB);'"
+  },
+  "dependencies": {
+    "hono": "^4.12.27",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250401.0",
+    "wrangler": "^4.14.0",
+    "typescript": "^5.8.3"
+  }
+}

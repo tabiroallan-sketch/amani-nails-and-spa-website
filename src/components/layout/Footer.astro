@@ -1,0 +1,111 @@
+---
+const quickLinks = [
+  { href: "/services", label: "Services" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/gallery", label: "Gallery" },
+  { href: "/about", label: "About Us" },
+  { href: "/contact", label: "Contact" },
+  { href: "/booking", label: "Book Appointment" },
+];
+
+const services = [
+  { href: "/services/manicure", label: "Manicure" },
+  { href: "/services/pedicure", label: "Pedicure" },
+  { href: "/services/massages", label: "Massages" },
+  { href: "/services/facials", label: "Facials" },
+  { href: "/services/spa-packages", label: "Spa Packages" },
+  { href: "/services/nail-art", label: "Nail Art" },
+];
+---
+
+<footer class="bg-espresso text-champagne">
+  <div class="container-luxury section-padding">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <!-- Brand -->
+      <div class="lg:col-span-1">
+        <a href="/" class="font-display text-2xl font-semibold text-champagne">
+          Amani
+        </a>
+        <p class="mt-4 font-body text-sm text-champagne leading-relaxed">
+          Where serenity meets sophistication. Premium beauty and wellness services in the heart of Nairobi.
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="font-display text-sm uppercase tracking-[0.1em] text-gold-leaf mb-4">
+          Quick Links
+        </h3>
+        <ul class="space-y-3">
+          {quickLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="font-body text-sm text-champagne hover:text-gold-leaf transition-colors duration-[var(--duration-fast)]"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Services -->
+      <div>
+        <h3 class="font-display text-sm uppercase tracking-[0.1em] text-gold-leaf mb-4">
+          Services
+        </h3>
+        <ul class="space-y-3">
+          {services.map((service) => (
+            <li>
+              <a
+                href={service.href}
+                class="font-body text-sm text-champagne hover:text-gold-leaf transition-colors duration-[var(--duration-fast)]"
+              >
+                {service.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h3 class="font-display text-sm uppercase tracking-[0.1em] text-gold-leaf mb-4">
+          Visit Us
+        </h3>
+        <address class="not-italic space-y-3 font-body text-sm text-champagne">
+          <p>Westlands, Nairobi<br />Kenya</p>
+          <p>
+            <a href="tel:+254700000000" class="hover:text-gold-leaf transition-colors">
+              +254 700 000 000
+            </a>
+          </p>
+          <p>
+            <a href="mailto:hello@amanispanairobi.com" class="hover:text-gold-leaf transition-colors">
+              hello@amanispanairobi.com
+            </a>
+          </p>
+          <p class="text-xs">
+            Mon – Sat: 8:00 AM – 8:00 PM<br />
+            Sun: 10:00 AM – 6:00 PM
+          </p>
+        </address>
+      </div>
+    </div>
+
+    <div class="mt-16 pt-8 border-t border-deep-cocoa flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="font-body text-xs text-champagne">
+        &copy; {new Date().getFullYear()} Amani Nails & Spa. All rights reserved.
+      </p>
+      <div class="flex gap-6">
+        <a href="#" class="text-champagne hover:text-gold-leaf transition-colors text-xs" aria-label="Instagram">
+          Instagram
+        </a>
+        <a href="#" class="text-champagne hover:text-gold-leaf transition-colors text-xs" aria-label="WhatsApp">
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

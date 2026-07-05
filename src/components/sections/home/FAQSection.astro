@@ -1,0 +1,78 @@
+---
+const faqs = [
+  {
+    q: "What services do you offer at Amani Nails & Spa?",
+    a: "We offer a comprehensive range of beauty and wellness services including manicures, pedicures, gel polish, acrylic nails, nail art, Swedish massage, deep tissue massage, hot stone massage, facials, body scrubs, waxing, eyebrow shaping, eyelash extensions, ear and nose piercing, and curated spa packages.",
+  },
+  {
+    q: "How do I book an appointment?",
+    a: "You can book directly through our website using the online booking system, call us at +254 700 000 000, send a message on WhatsApp, or visit us in person at our Westlands location. We recommend booking at least 24 hours in advance to secure your preferred time.",
+  },
+  {
+    q: "What payment methods do you accept?",
+    a: "We accept M-Pesa, all major credit and debit cards (Visa, Mastercard), and cash. For spa packages and gift certificates, we also accept bank transfers.",
+  },
+  {
+    q: "Do you offer gift certificates?",
+    a: "Yes! We offer both digital and physical gift certificates in any amount, redeemable across all our services and spa packages. They make the perfect gift for birthdays, anniversaries, or just because. Purchase them online or at our reception.",
+  },
+  {
+    q: "What is your cancellation policy?",
+    a: "We kindly ask for 24 hours notice for cancellations or rescheduling. Late cancellations (less than 24 hours) may incur a 50% fee. No-shows will be charged the full service amount. We understand emergencies happen — please just let us know as soon as possible.",
+  },
+  {
+    q: "What hygiene and safety measures do you follow?",
+    a: "Hygiene is our highest priority. All instruments are hospital-grade sterilized in an autoclave. Workstations are sanitized between every guest. Our therapists wear gloves for all treatments, and we use single-use files, buffers, and toe separators. We follow Kenya's Ministry of Health guidelines for beauty and wellness establishments.",
+  },
+];
+---
+
+<section class="section-padding bg-warm-white overflow-hidden" data-animate>
+  <div class="container-luxury">
+    <div class="text-center max-w-2xl mx-auto">
+      <p class="font-body text-xs uppercase tracking-[0.2em] text-taupe-warm mb-4">
+        FAQs
+      </p>
+      <h2 class="font-display text-[clamp(1.75rem,4vw,3rem)] font-semibold text-espresso text-balance">
+        Questions? <span class="gradient-text-gold">Answers.</span>
+      </h2>
+      <p class="mt-4 font-body text-base text-taupe mb-14">
+        Everything you need to know about the Amani experience. Can't find what
+        you're looking for? <a href="/contact" class="text-gold-leaf underline decoration-gold-leaf/30 hover:decoration-gold-leaf transition-all">Get in touch</a>.
+      </p>
+    </div>
+
+    <div class="max-w-3xl mx-auto space-y-3" data-animate-stagger>
+      {faqs.map((faq, i) => (
+        <details
+          class="group rounded-[var(--radius-md)] bg-ivory-silk transition-all duration-[var(--duration-normal)] ease-[var(--ease-luxury)] open:shadow-soft hover:shadow-soft"
+        >
+          <summary
+            class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none select-none"
+          >
+            <span class="font-display text-base font-medium text-espresso pr-4">
+              {faq.q}
+            </span>
+            <svg
+              class="h-4 w-4 shrink-0 text-gold-leaf transition-transform duration-[var(--duration-normal)] ease-[var(--ease-luxury)] group-open:rotate-45"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+          </summary>
+          <div class="px-6 pb-5 pt-0">
+            <p class="font-body text-sm leading-relaxed text-taupe">
+              {faq.a}
+            </p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

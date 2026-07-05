@@ -1,0 +1,60 @@
+---
+export interface Props {
+  quote: string;
+  author: string;
+  role?: string;
+  avatar?: string;
+  rating?: number;
+  variant?: "card" | "inline" | "highlight";
+}
+
+const { quote, author, role, avatar, rating, variant = "card" } = Astro.props;
+
+const containerStyles: Record<string, string> = {
+  card: "relative bg-warm-white shadow-soft rounded-[var(--radius-lg)] p-8 md:p-10 transition-all duration-[var(--duration-normal)] ease-[var(--ease-luxury)] hover:shadow-elevated hover:-translate-y-0.5",
+  inline: "relative pl-8 border-l-2 border-gold-leaf/40",
+  highlight: "relative gradient-warm rounded-[var(--radius-xl)] p-8 md:p-10 shadow-soft border border-champagne/50",
+};
+---
+
+<figure class={containerStyles[variant]} itemscope itemtype="https://schema.org/Review">
+  {rating && (
+    <div class="mb-4 flex items-center gap-0.5" aria-label={`${rating} out of 5 stars`}>
+      {Array.from({ length: 5 }, (_, i) => (
+        <svg
+          key={i}
+          class={`h-4 w-4 ${i < rating ? "text-champagne-gold" : "text-taupe-light/30"}`}
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+      ))}
+    </div>
+  )}
+
+  <blockquote class="font-body text-base md:text-lg leading-relaxed text-charcoal" itemprop="reviewBody">
+    <span class="text-gold-leaf/30 font-display text-4xl leading-none -ml-1" aria-hidden="true">&ldquo;</span>
+    {quote}
+    <span class="text-gold-leaf/30 font-display text-4xl leading-none" aria-hidden="true">&rdquo;</span>
+  </blockquote>
+
+  <figcaption class="mt-6 flex items-center gap-4">
+    {avatar ? (
+      <img
+        src={avatar}
+        alt={author}
+        class="h-12 w-12 rounded-full object-cover ring-2 ring-champagne/50"
+        loading="lazy"
+      />
+    ) : (
+      <div class="flex h-12 w-12 items-center justify-center rounded-full bg-champagne text-gold-leaf font-display font-semibold text-lg ring-2 ring-champagne/50">
+        {author.charAt(0)}
+      </div>
+    )}
+    <div>
+      <div class="font-display font-semibold text-espresso" itemprop="author">{author}</div>
+      {role && <div class="font-body text-sm text-taupe">{role}</div>}
+    </div>
+  </figcaption>
+</figure>
